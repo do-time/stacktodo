@@ -1,10 +1,10 @@
-package io.app.stacktodobe.domain.notification.entity;
+package io.app.stacktodobe.notification.entity;
 
-import io.app.stacktodobe.domain.base.BaseEntity;
-import io.app.stacktodobe.domain.member.entity.Member;
-import io.app.stacktodobe.domain.notification.enums.NotificationChannel;
-import io.app.stacktodobe.domain.notification.enums.NotificationEntityType;
-import io.app.stacktodobe.domain.notification.enums.NotificationStatus;
+import io.app.stacktodobe.common.entity.BaseEntity;
+import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.notification.enums.NotificationChannel;
+import io.app.stacktodobe.notification.enums.NotificationEntityType;
+import io.app.stacktodobe.notification.enums.NotificationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

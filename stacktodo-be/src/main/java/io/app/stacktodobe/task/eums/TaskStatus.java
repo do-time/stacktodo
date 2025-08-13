@@ -1,4 +1,4 @@
-package io.app.stacktodobe.domain.task.eums;
+package io.app.stacktodobe.task.eums;
 
 /**
  * 작업(Task) 상태
