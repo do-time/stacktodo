@@ -1,4 +1,4 @@
-package io.app.stacktodobe.domain.notification.enums;
+package io.app.stacktodobe.notification.enums;
 
 /**
  * 알림 전송 상태

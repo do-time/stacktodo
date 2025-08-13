@@ -1,4 +1,4 @@
-package io.app.stacktodobe.domain.base;
+package io.app.stacktodobe.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

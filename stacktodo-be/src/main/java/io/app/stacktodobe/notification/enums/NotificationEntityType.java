@@ -1,4 +1,4 @@
-package io.app.stacktodobe.domain.notification.enums;
+package io.app.stacktodobe.notification.enums;
 
 /**
  * 알림 대상 엔티티 유형

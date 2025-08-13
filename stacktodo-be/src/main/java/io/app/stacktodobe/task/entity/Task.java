@@ -1,20 +1,17 @@
-package io.app.stacktodobe.domain.task.entity;
+package io.app.stacktodobe.task.entity;
 
-import io.app.stacktodobe.domain.base.BaseEntity;
-import io.app.stacktodobe.domain.category.entity.Category;
-import io.app.stacktodobe.domain.member.entity.Member;
-import io.app.stacktodobe.domain.task.eums.TaskStatus;
-import io.app.stacktodobe.domain.workspace.entity.Workspace;
+import io.app.stacktodobe.common.entity.BaseEntity;
+import io.app.stacktodobe.category.entity.Category;
+import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.task.eums.TaskStatus;
+import io.app.stacktodobe.workspace.entity.Workspace;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity

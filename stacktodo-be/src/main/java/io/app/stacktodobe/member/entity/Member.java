@@ -1,10 +1,8 @@
-package io.app.stacktodobe.domain.member.entity;
+package io.app.stacktodobe.member.entity;
 
-import io.app.stacktodobe.domain.base.BaseEntity;
+import io.app.stacktodobe.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;

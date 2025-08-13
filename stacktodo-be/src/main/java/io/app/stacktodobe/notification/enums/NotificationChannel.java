@@ -1,4 +1,4 @@
-package io.app.stacktodobe.domain.notification.enums;
+package io.app.stacktodobe.notification.enums;
 
 public enum NotificationChannel {
     IN_APP, // 인앱 알림

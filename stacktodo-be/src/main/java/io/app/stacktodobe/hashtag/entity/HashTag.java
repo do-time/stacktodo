@@ -1,6 +1,6 @@
-package io.app.stacktodobe.domain.hashtag.entity;
+package io.app.stacktodobe.hashtag.entity;
 
-import io.app.stacktodobe.domain.base.BaseEntity;
+import io.app.stacktodobe.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
