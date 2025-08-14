@@ -1,4 +1,4 @@
-package io.app.stacktodobe.config;
+package io.app.stacktodobe.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

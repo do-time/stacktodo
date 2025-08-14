@@ -34,8 +34,8 @@ public class TestSourceGenerator {
         return password.toString();
     }
 
-    public static String generateName() {
-        return "name " + UUID.randomUUID().toString().substring(0, 8);
+    public static String generateNickname() {
+        return UUID.randomUUID().toString();
     }
 
     public static String generateProfileImage() {

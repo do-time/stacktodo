@@ -1,8 +1,9 @@
 package io.app.stacktodobe.member.persistence.entity;
 
 
+import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -10,12 +11,13 @@ import java.util.UUID;
 @Table(name = "member",
         uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "email"}))
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@Setter(value = AccessLevel.PRIVATE)
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long dataKey;
+    private Long id;
 
     @Column(name = "member_id", unique = true, nullable = false)
     private UUID memberId;
@@ -25,8 +27,8 @@ public class Member {
 
     private String hashedPassword;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
 
     @Column(name = "profile_image")
     private String profileImage;
@@ -34,5 +36,14 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    public static Member createMember(MemberCreateCommand command){
+        Member member = new Member();
+        member.setMemberId(UUID.fromString(command.nickname()));
+        member.setEmail(command.email());
+        member.setNickname(command.nickname());
+        member.setProfileImage(command.profileImage());
+        member.setPhoneNumber(command.phoneNumber());
+        return member;
+    }
 
 }

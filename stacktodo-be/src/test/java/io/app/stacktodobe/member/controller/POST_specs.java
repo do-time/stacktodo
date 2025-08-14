@@ -1,10 +1,11 @@
-package io.app.stacktodobe.member;
+package io.app.stacktodobe.member.controller;
 
 import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
@@ -14,14 +15,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class POST_specs {
 
     @Test
-    void 회원가입_정상요청시_200_ok를_반환한다(
+    void 회원가입_정상요청시_204_NO_CONTENT_를_반환한다(
             @Autowired TestRestTemplate testRestTemplate
     ) {
         //arrange
         var command = new MemberCreateCommand(
                 generateEmail(),
                 generatePassword(),
-                generateName(),
+                generateNickname(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );
@@ -33,8 +34,25 @@ public class POST_specs {
                 Void.class);
         //assert
         assertThat(response.getStatusCodeValue())
-                .isEqualTo(200);
-
-
+                .isEqualTo(204);
     }
+
+    @ValueSource(strings = {
+            "test@email...",
+            "test.email.cc"
+    })
+    @ParameterizedTest
+    void 잘못된_형식의_이메일요청시_400_bad_request(
+            String email,
+            @Autowired TestRestTemplate testRestTemplate
+    ) {
+        var command = new MemberCreateCommand(
+                email,
+         generatePassword(),
+         generateNickname(),
+         generateProfileImage(),
+         generatePhoneNumber()
+        );
+    }
+
 }
