@@ -1,7 +1,7 @@
 package io.app.stacktodobe.workspace.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.member.persistence.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

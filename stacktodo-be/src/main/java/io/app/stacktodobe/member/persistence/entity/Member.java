@@ -10,8 +10,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "member",
         uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "email"}))
-@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@Setter(value = AccessLevel.PRIVATE)
+//@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@Setter(value = AccessLevel.PRIVATE) @Getter
 public class Member {
 
     @Id

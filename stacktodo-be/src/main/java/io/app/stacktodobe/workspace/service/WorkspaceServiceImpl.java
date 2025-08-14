@@ -1,6 +1,6 @@
 package io.app.stacktodobe.workspace.service;
 
-import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.member.persistence.entity.Member;
 import io.app.stacktodobe.workspace.entity.Workspace;
 import io.app.stacktodobe.workspace.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
         var newWorkspace = Workspace.builder()
                 .owner(member)
-                .name(member.getName())
+                .name(member.getNickname())
                 .build();
 
         workspaceRepository.save(newWorkspace);

@@ -1,8 +1,8 @@
 package io.app.stacktodobe.task.entity;
 
-import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.category.entity.Category;
-import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.common.entity.BaseEntity;
+import io.app.stacktodobe.member.persistence.entity.Member;
 import io.app.stacktodobe.task.eums.TaskStatus;
 import io.app.stacktodobe.workspace.entity.Workspace;
 import jakarta.persistence.*;
