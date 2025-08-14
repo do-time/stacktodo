@@ -15,6 +15,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에 맞게 조정(Oracle이면 SEQUENCE)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "created_at", updatable = false)
