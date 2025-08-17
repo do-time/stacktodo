@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:stacktodo-test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+  sql:
+    init:
+      mode: never             # schema.sql/data.sql 쓰면 'always'로 변경
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+
+# H2 콘솔 — E2E 디버깅용
+# spring:
+#   h2:
+#     console:
+#       enabled: true
+#       path: /h2-console
