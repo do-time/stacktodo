@@ -1,6 +1,6 @@
-package io.app.stacktodobe.workspace.repository;
+package io.app.stacktodobe.workspace.persistence.repository;
 
-import io.app.stacktodobe.workspace.entity.WorkspaceMember;
+import io.app.stacktodobe.workspace.persistence.entity.WorkspaceMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
