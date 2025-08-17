@@ -12,6 +12,7 @@ import java.util.UUID;
         uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "email"}))
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @Setter(value = AccessLevel.PRIVATE)
+@Getter
 public class Member {
 
     @Id

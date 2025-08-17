@@ -2,9 +2,9 @@ package io.app.stacktodobe.task.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.category.entity.Category;
-import io.app.stacktodobe.member.entity.Member;
+import io.app.stacktodobe.member.persistence.entity.Member;
 import io.app.stacktodobe.task.eums.TaskStatus;
-import io.app.stacktodobe.workspace.entity.Workspace;
+import io.app.stacktodobe.workspace.persistence.entity.Workspace;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
