@@ -2,6 +2,7 @@ package io.app.stacktodobe.utils;
 
 
 import io.app.stacktodobe.StacktodoBeApplication;
+import io.app.stacktodobe.utils.testfixture.TestFixtureConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.annotation.Retention;
@@ -9,7 +10,7 @@ import java.lang.annotation.Target;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-        , classes = {StacktodoBeApplication.class}
+        , classes = {StacktodoBeApplication.class, TestFixtureConfiguration.class}
 )
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 @Target({java.lang.annotation.ElementType.TYPE})

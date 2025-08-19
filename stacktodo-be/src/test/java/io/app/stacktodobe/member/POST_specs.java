@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.controller;
+package io.app.stacktodobe.member;
 
 import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
