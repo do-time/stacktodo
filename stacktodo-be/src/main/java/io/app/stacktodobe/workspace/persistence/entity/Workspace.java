@@ -10,7 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "workspace",
         uniqueConstraints = @UniqueConstraint(columnNames = {"owner_id", "name"}))
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
+@Builder(access = AccessLevel.PRIVATE)
 public class Workspace extends BaseEntity{
     @Column(nullable = false, length = 100)
     private String name;
@@ -19,10 +21,10 @@ public class Workspace extends BaseEntity{
     @JoinColumn(name = "owner_id", nullable = false)
     private Member owner;
 
-    public static Workspace createWorkspace(String name, Member member) {
-        Workspace workspace = new Workspace();
-        workspace.name = name;
-        workspace.owner = member;
-        return workspace;
+    public static Workspace createWorkspace(String name, Member owner) {
+        return Workspace.builder()
+                .name(name)
+                .owner(owner)
+                .build();
     }
 }
