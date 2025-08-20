@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
-public class WorkspaceCommandService implements WorkspaceCommandUserCase{
+public class WorkspaceCommandService implements WorkspaceCommandUseCase {
     private final WorkspaceRepository workspaceRepository;
 
     private final MemberRepository memberRepository;
