@@ -1,4 +1,4 @@
-package io.app.stacktodobe.category.enums;
+package io.app.stacktodobe.category.persistence.entity;
 
 /**
  * 카테고리(템플릿) 가시 범위

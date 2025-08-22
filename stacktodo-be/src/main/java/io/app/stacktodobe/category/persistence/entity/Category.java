@@ -1,7 +1,6 @@
-package io.app.stacktodobe.category.entity;
+package io.app.stacktodobe.category.persistence.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.category.enums.CategoryScope;
 import io.app.stacktodobe.member.persistence.entity.Member;
 import io.app.stacktodobe.workspace.persistence.entity.Workspace;
 import jakarta.persistence.*;
@@ -15,39 +14,28 @@ import java.time.LocalDateTime;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 @EntityListeners(AuditingEntityListener.class)
 public class Category extends BaseEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(length = 100, nullable = false)
+    // 카테고리 표시명(예: 루틴, 여행계획, 아침 루틴 등)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Lob
     private String description;
 
+    // 선택: 검색/공유를 위한 슬러그
+    @Column(length = 120, unique = false)
+    private String slug;
+
+    // 공개 범위(개인/워크스페이스/커뮤니티)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private CategoryScope scope;
+    private CategoryScope scope; // personal/workspace/community
 
-    // scope='WORKSPACE'일 때만 값 존재
+    // scope=='workspace'일 때만 사용
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
 
-    // scope='PERSONAL'일 때만 값 존재
+    // scope=='personal'일 때만 사용
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    // 복사된 경우 원본 템플릿
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "original_category_id")
-    private Category originalCategory;
-
-    // 커뮤니티 공유 정보
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shared_by_id")
-    private Member sharedBy;
-
-    private LocalDateTime sharedAt;
 }
