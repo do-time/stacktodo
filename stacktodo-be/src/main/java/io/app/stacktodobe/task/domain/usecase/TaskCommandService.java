@@ -33,10 +33,12 @@ public class TaskCommandService implements TaskCommandUsecase{
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
 
         Category category = categoryRepository.findById(command.categoryId())
-                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
+                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 카테고리입니다: " + command.workspaceId()));
 
         // 2) 저장
-        taskRepository.save(Task.createTask(command, workspace, category, owner));
+        Task task = taskRepository.save(Task.createTask(command, workspace, category, owner));
+
+        System.out.println("테스크 = " + task.toString());
 
 //        Category category = null;
 //        if (command.categoryId() != null) {

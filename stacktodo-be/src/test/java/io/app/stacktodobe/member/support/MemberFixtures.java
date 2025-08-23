@@ -20,4 +20,16 @@ public final class MemberFixtures {
 
         return repo.save(Member.createMember(command)).getId();
     }
+
+    public static Member persisted(MemberRepository repo) {
+        var command = new MemberCreateCommand(
+                generateEmail(),
+                generatePassword(),
+                generateNickname(),
+                generateProfileImage(),
+                generatePhoneNumber()
+        );
+
+        return repo.save(Member.createMember(command));
+    }
 }
