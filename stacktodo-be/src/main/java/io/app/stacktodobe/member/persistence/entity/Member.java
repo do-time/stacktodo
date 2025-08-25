@@ -28,8 +28,8 @@ public class Member {
 
     private String hashedPassword;
 
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "profile_image")
     private String profileImage;
@@ -42,7 +42,7 @@ public class Member {
         member.setMemberId(UUID.randomUUID());
         member.setHashedPassword(hashedPassword);
         member.setEmail(command.email());
-        member.setNickname(command.nickname());
+        member.setUsername(command.nickname());
         member.setProfileImage(command.profileImage());
         member.setPhoneNumber(command.phoneNumber());
 

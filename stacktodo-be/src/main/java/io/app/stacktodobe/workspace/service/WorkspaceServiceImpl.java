@@ -21,7 +21,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
         var newWorkspace = Workspace.builder()
                 .owner(member)
-                .name(member.getNickname())
+                .name(member.getUsername())
                 .build();
 
         workspaceRepository.save(newWorkspace);

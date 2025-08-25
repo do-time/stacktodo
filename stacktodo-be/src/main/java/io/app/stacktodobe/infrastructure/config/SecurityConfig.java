@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/v1/members/signup").permitAll()
                         .requestMatchers("/api/v1/members/issueToken").permitAll()
+                        .requestMatchers("/api/v1/members/me").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

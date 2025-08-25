@@ -22,18 +22,19 @@ public class IssueTokenCommandUseCase {
     private final JwtKeyHolder jwtKeyHolder;
 
     public AccessTokenCarrier issueToken(IssueTokenCommand command) {
-        System.out.println("email = " + command.email());
-        Member member = memberRepository.findByEmail(command.email()).orElseThrow(() -> new IllegalArgumentException("Member not found with email: " + command.email()));
-        if (!passwordEncoder.matches(command.password(), member.getHashedPassword())) {
-            throw new InvalidCommandException("Invalid password for email: " + command.email());
-        }
-        String accessToken = Jwts
-                .builder()
-                .setSubject(member.getEmail())
-                .signWith(jwtKeyHolder.secretKey())
-                .compact();
-        return new AccessTokenCarrier(accessToken);
+        return memberRepository.findByEmail(command.email())
+                .filter(member -> passwordEncoder.matches(command.password(), member.getHashedPassword()))
+                .map(this::composeToken)
+                .map(AccessTokenCarrier::new)
+                .orElseThrow(() -> new InvalidCommandException("Invalid email or password"));
     }
 
+    private String composeToken(Member member) {
+        return Jwts
+                .builder()
+                .setSubject(member.getMemberId().toString())
+                .signWith(jwtKeyHolder.secretKey())
+                .compact();
+    }
 
 }
