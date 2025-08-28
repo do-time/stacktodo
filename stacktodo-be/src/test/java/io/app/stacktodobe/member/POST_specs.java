@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.controller;
+package io.app.stacktodobe.member;
 
 import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
@@ -53,6 +53,39 @@ public class POST_specs {
          generateProfileImage(),
          generatePhoneNumber()
         );
+    }
+
+    @ValueSource(strings = {
+            "1234",
+            "short",
+            "abcdefg",
+            "abcdefghij"
+
+    })
+    @ParameterizedTest
+    void 잘못된_형식의_패스워드_입력시_400_bad_request(
+            String password,
+            @Autowired TestRestTemplate testRestTemplate
+    ) {
+        //arrange
+        var command = new MemberCreateCommand(
+                generateEmail(),
+                password,
+                generateNickname(),
+                generateProfileImage(),
+                generatePhoneNumber()
+        );
+
+        //act
+        var response = testRestTemplate.postForEntity(
+                "/api/v1/members/signup",
+                command,
+                Void.class
+        );
+
+        //assert
+        assertThat(response.getStatusCodeValue())
+                .isEqualTo(400);
     }
 
 }

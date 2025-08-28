@@ -13,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @Setter(value = AccessLevel.PRIVATE)
 @Getter
+//@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Member {
 
     @Id
@@ -37,13 +39,15 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public static Member createMember(MemberCreateCommand command){
+    public static Member createMember(MemberCreateCommand command, String hashedPassword) {
         Member member = new Member();
-        member.setMemberId(UUID.fromString(command.nickname()));
+        member.setMemberId(UUID.randomUUID());
+        member.setHashedPassword(hashedPassword);
         member.setEmail(command.email());
         member.setNickname(command.nickname());
         member.setProfileImage(command.profileImage());
         member.setPhoneNumber(command.phoneNumber());
+
         return member;
     }
 

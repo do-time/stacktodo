@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class MemberCommandExceptionHandler {
 
     @ExceptionHandler(InvalidCommandException.class)
-    public ResponseEntity<?> handleInvalidCommandException(InvalidCommandException e) {
+    public ResponseEntity<Void> handleInvalidCommandException(InvalidCommandException e) {
 
         return ResponseEntity
                 .badRequest()
-                .body("Invalid command: " + e.getMessage());
-
+                .build();
     }
 }
