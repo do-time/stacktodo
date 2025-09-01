@@ -1,9 +1,8 @@
 package io.app.stacktodobe.category.entity;
 
-import io.app.stacktodobe.category.enums.CategoryScope;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.workspace.entity.Workspace;
+import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -32,7 +31,7 @@ public class Category extends BaseEntity {
     // scope='WORKSPACE'일 때만 값 존재
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_id")
-    private Workspace workspace;
+    private WorkspaceEntity workspace;
 
     // scope='PERSONAL'일 때만 값 존재
     @ManyToOne(fetch = FetchType.LAZY)

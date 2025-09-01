@@ -2,12 +2,10 @@ package io.app.stacktodobe.category.persistence.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.workspace.persistence.entity.Workspace;
+import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "categories")
@@ -32,7 +30,7 @@ public class Category extends BaseEntity {
     // scope=='workspace'일 때만 사용
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_id")
-    private Workspace workspace;
+    private WorkspaceEntity workspaceEntity;
 
     // scope=='personal'일 때만 사용
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,6 +1,6 @@
 package io.app.stacktodobe.workspace.command.support;
 
-import io.app.stacktodobe.workspace.presentation.command.WorkspaceCreateCommand;
+import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
 
 import java.util.concurrent.ThreadLocalRandom;
 
