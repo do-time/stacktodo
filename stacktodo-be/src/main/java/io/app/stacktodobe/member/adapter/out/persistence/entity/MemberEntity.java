@@ -2,19 +2,20 @@ package io.app.stacktodobe.member.adapter.out.persistence.entity;
 
 
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
 
 @Entity
-@Table(name = "member",
+@Table(name = "members",
         uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "email"}))
 @Setter(value = AccessLevel.PRIVATE)
 @Getter
 //@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @NoArgsConstructor
-public class Member {
+public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,16 +39,16 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public static Member createMember(MemberCreateCommand command, String hashedPassword) {
-        Member member = new Member();
-        member.setMemberId(UUID.randomUUID());
-        member.setHashedPassword(hashedPassword);
-        member.setEmail(command.email());
-        member.setNickname(command.nickname());
-        member.setProfileImage(command.profileImage());
-        member.setPhoneNumber(command.phoneNumber());
+    public static MemberEntity of(Member domain, String hashedPassword) {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMemberId(UUID.randomUUID());
+        memberEntity.setHashedPassword(hashedPassword);
+        memberEntity.setEmail(domain.getEmail());
+        memberEntity.setNickname(domain.getNickname());
+        memberEntity.setProfileImage(domain.getProfileImage());
+        memberEntity.setPhoneNumber(domain.getPhoneNumber());
 
-        return member;
+        return memberEntity;
     }
 
 }

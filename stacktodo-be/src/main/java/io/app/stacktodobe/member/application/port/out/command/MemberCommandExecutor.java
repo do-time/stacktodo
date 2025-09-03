@@ -1,22 +1,23 @@
 package io.app.stacktodobe.member.application.port.out.command;
 
+import io.app.stacktodobe.member.domain.Member;
 import io.app.stacktodobe.member.exception.InvalidCommandException;
-import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 
 import java.util.function.Consumer;
 
 public class MemberCommandExecutor {
 
-    private final Consumer<Member> saveMember;
+    private final Consumer<MemberEntity> saveMember;
 
-    public MemberCommandExecutor(Consumer<Member> saveMember) {
+    public MemberCommandExecutor(Consumer<MemberEntity> saveMember) {
         this.saveMember = saveMember;
     }
 
     public void execute(MemberCreateCommand command, String hashedPassword) {
         validate(command);
-        saveMember.accept(Member.createMember(command, hashedPassword));
+        saveMember.accept(MemberEntity.of(MemberCreateCommand.of(command), hashedPassword));
     }
 
 

@@ -1,8 +1,8 @@
 package io.app.stacktodobe.workspace.service;
 
-import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.domain.Member;
 import io.app.stacktodobe.workspace.domain.usecase.WorkspaceCommandService;
-import io.app.stacktodobe.workspace.entity.Workspace;
+//import io.app.stacktodobe.workspace.entity.Workspace;
 import io.app.stacktodobe.workspace.persistence.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

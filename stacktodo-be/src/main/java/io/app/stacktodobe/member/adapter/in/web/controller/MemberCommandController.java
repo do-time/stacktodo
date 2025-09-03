@@ -1,5 +1,6 @@
 package io.app.stacktodobe.member.adapter.in.web.controller;
 
+import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberDto;
 import io.app.stacktodobe.member.application.port.in.usecase.MemberCommandUseCase;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,9 @@ public class MemberCommandController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@RequestBody MemberCreateCommand command) {
+    public ResponseEntity<Void> signUp(@RequestBody CreateMemberDto request) {
+        MemberCreateCommand command = CreateMemberDto.of(request);
+
         memberCommandUseCase.createMember(command, passwordEncoder.encode(command.password()));
         // 회원 가입 후에는 일반적으로 201 Created 상태 코드를 반환하는 것이 좋지만,
         // 여기서는 요청이 성공적으로 처리되었음을 나타내기 위해 204 No Content를 반환합니다.

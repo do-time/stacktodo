@@ -2,7 +2,7 @@ package io.app.stacktodobe.task.persistence.entity;
 
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.workspace.persistence.entity.Workspace;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -39,7 +39,7 @@ public class Task extends BaseEntity {
     // 담당자(소유자)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    private Member owner;
+    private MemberEntity owner;
 
     // 템플릿에서 복사된 경우
     @ManyToOne(fetch = FetchType.LAZY)

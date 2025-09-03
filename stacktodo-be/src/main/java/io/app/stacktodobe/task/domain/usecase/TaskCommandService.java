@@ -2,9 +2,8 @@ package io.app.stacktodobe.task.domain.usecase;
 
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.category.persistence.repository.CategoryRepository;
-import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
-import io.app.stacktodobe.task.persistence.entity.Task;
 import io.app.stacktodobe.task.persistence.repository.TaskRepository;
 import io.app.stacktodobe.task.presentation.command.TaskCreateCommand;
 import io.app.stacktodobe.workspace.adapter.model.InvalidCommandException;
@@ -26,7 +25,7 @@ public class TaskCommandService implements TaskCommandUsecase{
     @Override
     public void createTask(TaskCreateCommand command) {
         // 1) 연관 엔티티 검증
-        Member owner = memberRepository.findById(command.ownerId())
+        MemberEntity owner = memberRepository.findById(command.ownerId())
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 사용자입니다: " + command.ownerId()));
 
         Workspace workspace = workspaceRepository.findById(command.workspaceId())

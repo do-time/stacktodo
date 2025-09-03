@@ -1,6 +1,8 @@
 package io.app.stacktodobe.member.adapter.in.web.dto;
 
 
+import io.app.stacktodobe.member.domain.Member;
+
 public record MemberCreateCommand(
         String email,
         String password,
@@ -8,4 +10,10 @@ public record MemberCreateCommand(
         String profileImage,
         String phoneNumber
 ) {
+
+    public static Member of(MemberCreateCommand command) {
+        return Member.createMember(
+                command
+        );
+    }
 }

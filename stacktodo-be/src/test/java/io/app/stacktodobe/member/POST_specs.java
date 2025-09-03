@@ -33,7 +33,7 @@ public class POST_specs {
                 command,
                 Void.class);
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(204);
     }
 
@@ -84,7 +84,7 @@ public class POST_specs {
         );
 
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(400);
     }
 
