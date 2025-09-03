@@ -4,21 +4,20 @@ import io.app.stacktodobe.infrastructure.jwt.JwtKeyHolder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 @Configuration
-@Profile("!test")
+//@Profile("!test")
 public class SecurityConfig {
     
     @Bean
@@ -37,8 +36,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(c -> c.jwt(jwt -> jwt.decoder(jwtDecoder)))
                 .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/api/v1/members").permitAll()
                         .requestMatchers("/api/v1/members/signup").permitAll()
                         .requestMatchers("/api/v1/members/issueToken").permitAll()
+                        .requestMatchers("/api/v1/workspaces/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

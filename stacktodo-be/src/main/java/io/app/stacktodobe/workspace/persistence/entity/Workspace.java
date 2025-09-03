@@ -1,7 +1,7 @@
 package io.app.stacktodobe.workspace.persistence.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,9 +19,9 @@ public class Workspace extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
-    private Member owner;
+    private MemberEntity owner;
 
-    public static Workspace createWorkspace(String name, Member owner) {
+    public static Workspace createWorkspace(String name, MemberEntity owner) {
         return Workspace.builder()
                 .name(name)
                 .owner(owner)

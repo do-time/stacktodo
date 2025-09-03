@@ -1,16 +1,13 @@
 package io.app.stacktodobe.issuetoken;
 
-import io.app.stacktodobe.member.presentation.command.AccessTokenCarrier;
-import io.app.stacktodobe.member.presentation.command.IssueTokenCommand;
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
+import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
+import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
+import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
 import io.app.stacktodobe.utils.testfixture.TestFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Objects;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static java.util.Objects.requireNonNull;

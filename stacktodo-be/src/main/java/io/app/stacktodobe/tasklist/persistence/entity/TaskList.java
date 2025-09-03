@@ -2,16 +2,13 @@ package io.app.stacktodobe.tasklist.persistence.entity;
 
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
@@ -49,7 +46,7 @@ public class TaskList extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member; // scope==personal일 때 사용
+    private MemberEntity memberEntity; // scope==personal일 때 사용
 
     // 템플릿 복사 원본
     @ManyToOne(fetch = FetchType.LAZY)
@@ -59,7 +56,7 @@ public class TaskList extends BaseEntity {
     // 커뮤니티 공유 정보
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shared_by_id")
-    private Member sharedBy;
+    private MemberEntity sharedBy;
 
     @Column(nullable = false)
     @Builder.Default

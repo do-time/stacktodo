@@ -1,6 +1,6 @@
 package io.app.stacktodobe.member;
 
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
+import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,7 +33,7 @@ public class POST_specs {
                 command,
                 Void.class);
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(204);
     }
 
@@ -84,7 +84,7 @@ public class POST_specs {
         );
 
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(400);
     }
 

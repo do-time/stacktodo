@@ -1,7 +1,7 @@
 package io.app.stacktodobe.workspace.persistence.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,17 +28,17 @@ public class WorkspaceMember extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    private MemberEntity memberEntity;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     @Builder.Default
     private WorkspaceMemberRole role = WorkspaceMemberRole.MEMBER;
 
-    public static WorkspaceMember createWorkspaceMember(Workspace workspace, Member member, WorkspaceMemberRole role){
+    public static WorkspaceMember createWorkspaceMember(Workspace workspace, MemberEntity memberEntity, WorkspaceMemberRole role){
         return WorkspaceMember.builder()
                 .workspace(workspace)
-                .member(member)
+                .memberEntity(memberEntity)
                 .role(role)
                 .build();
     }
