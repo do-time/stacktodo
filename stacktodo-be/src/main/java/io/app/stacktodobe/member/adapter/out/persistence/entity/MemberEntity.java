@@ -2,7 +2,6 @@ package io.app.stacktodobe.member.adapter.out.persistence.entity;
 
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import io.app.stacktodobe.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,7 +34,7 @@ public class MemberEntity extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public static MemberEntity of(Member domain, String hashedPassword) {
+    public static MemberEntity domainToEntity(Member domain, String hashedPassword) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberId(UUID.randomUUID());
         memberEntity.setHashedPassword(hashedPassword);

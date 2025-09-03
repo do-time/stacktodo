@@ -3,6 +3,7 @@ package io.app.stacktodobe.member.adapter.in.web.controller;
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
 import io.app.stacktodobe.member.application.port.in.usecase.IssueTokenCommandUseCase;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,8 @@ public class IssueTokenCommandController {
     private final IssueTokenCommandUseCase issueTokenCommandUseCase;
 
     @PostMapping("/issueToken")
-    ResponseEntity<AccessTokenCarrier> issueToken(@RequestBody IssueTokenCommand command) {
+    ResponseEntity<AccessTokenCarrier> issueToken(@Valid @RequestBody IssueTokenCommand command) {
+        System.out.println("Received IssueTokenCommand: " + command); // Debugging line
         return ResponseEntity.ok(
                 issueTokenCommandUseCase.issueToken(command));
     }
