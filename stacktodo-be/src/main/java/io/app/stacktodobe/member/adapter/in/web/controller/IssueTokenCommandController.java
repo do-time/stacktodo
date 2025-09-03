@@ -1,8 +1,8 @@
-package io.app.stacktodobe.member.presentation.command.controller;
+package io.app.stacktodobe.member.adapter.in.web.controller;
 
-import io.app.stacktodobe.member.domain.usecase.IssueTokenCommandUseCase;
-import io.app.stacktodobe.member.presentation.command.AccessTokenCarrier;
-import io.app.stacktodobe.member.presentation.command.IssueTokenCommand;
+import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
+import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.usecase.IssueTokenCommandUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

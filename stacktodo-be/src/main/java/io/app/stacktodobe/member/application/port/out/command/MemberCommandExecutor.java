@@ -1,10 +1,8 @@
-package io.app.stacktodobe.member.adapter.command;
+package io.app.stacktodobe.member.application.port.out.command;
 
-import io.app.stacktodobe.member.adapter.model.InvalidCommandException;
-import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import io.app.stacktodobe.member.exception.InvalidCommandException;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 
 import java.util.function.Consumer;
 

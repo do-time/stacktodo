@@ -1,7 +1,7 @@
 package io.app.stacktodobe.notification.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
 import io.app.stacktodobe.notification.enums.NotificationChannel;
 import io.app.stacktodobe.notification.enums.NotificationEntityType;
 import io.app.stacktodobe.notification.enums.NotificationStatus;

@@ -1,6 +1,6 @@
 package io.app.stacktodobe.workspace.command.controller;
 
-import io.app.stacktodobe.member.persistence.repository.MemberRepository;
+import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
 import io.app.stacktodobe.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
 import io.app.stacktodobe.workspace.command.support.WorkspaceFixtures;

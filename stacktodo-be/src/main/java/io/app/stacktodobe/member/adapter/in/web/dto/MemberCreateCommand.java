@@ -1,7 +1,5 @@
-package io.app.stacktodobe.member.presentation.command;
+package io.app.stacktodobe.member.adapter.in.web.dto;
 
-
-import io.app.stacktodobe.member.persistence.entity.Member;
 
 public record MemberCreateCommand(
         String email,

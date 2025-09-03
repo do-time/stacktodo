@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.presentation.command.handler;
+package io.app.stacktodobe.member.exception.handler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

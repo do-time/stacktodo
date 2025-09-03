@@ -2,8 +2,8 @@ package io.app.stacktodobe.task.domain.usecase;
 
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.category.persistence.repository.CategoryRepository;
-import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.member.persistence.repository.MemberRepository;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
 import io.app.stacktodobe.task.persistence.entity.Task;
 import io.app.stacktodobe.task.persistence.repository.TaskRepository;
 import io.app.stacktodobe.task.presentation.command.TaskCreateCommand;
@@ -36,7 +36,7 @@ public class TaskCommandService implements TaskCommandUsecase{
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
 
         // 2) 저장
-        taskRepository.save(Task.createTask(command, workspace, category, owner));
+//        taskRepository.save(Task.createTask(command, workspace, category, owner));
 
 //        Category category = null;
 //        if (command.categoryId() != null) {

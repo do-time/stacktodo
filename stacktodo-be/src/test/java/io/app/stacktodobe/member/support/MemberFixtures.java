@@ -1,8 +1,9 @@
 package io.app.stacktodobe.member.support;
 
-import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.member.persistence.repository.MemberRepository;
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
+import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static io.app.stacktodobe.utils.TestSourceGenerator.generatePhoneNumber;
@@ -18,6 +19,6 @@ public final class MemberFixtures {
                 generatePhoneNumber()
         );
 
-        return repo.save(Member.createMember(command)).getId();
+        return repo.save(Member.createMember(command, "")).getId();
     }
 }

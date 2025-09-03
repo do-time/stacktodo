@@ -1,11 +1,11 @@
-package io.app.stacktodobe.member.domain.usecase;
+package io.app.stacktodobe.member.application.port.in.usecase;
 
 import io.app.stacktodobe.infrastructure.jwt.JwtKeyHolder;
-import io.app.stacktodobe.member.adapter.model.InvalidCommandException;
-import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.member.persistence.repository.MemberRepository;
-import io.app.stacktodobe.member.presentation.command.AccessTokenCarrier;
-import io.app.stacktodobe.member.presentation.command.IssueTokenCommand;
+import io.app.stacktodobe.member.exception.InvalidCommandException;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
+import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
+import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +22,12 @@ public class IssueTokenCommandUseCase {
     private final JwtKeyHolder jwtKeyHolder;
 
     public AccessTokenCarrier issueToken(IssueTokenCommand command) {
-        System.out.println("email = " + command.email());
         Member member = memberRepository.findByEmail(command.email()).orElseThrow(() -> new IllegalArgumentException("Member not found with email: " + command.email()));
+
         if (!passwordEncoder.matches(command.password(), member.getHashedPassword())) {
             throw new InvalidCommandException("Invalid password for email: " + command.email());
         }
+
         String accessToken = Jwts
                 .builder()
                 .setSubject(member.getEmail())

@@ -1,7 +1,7 @@
-package io.app.stacktodobe.member.persistence.entity;
+package io.app.stacktodobe.member.adapter.out.persistence.entity;
 
 
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
+import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +10,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "member",
         uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "email"}))
-@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @Setter(value = AccessLevel.PRIVATE)
 @Getter
 //@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)

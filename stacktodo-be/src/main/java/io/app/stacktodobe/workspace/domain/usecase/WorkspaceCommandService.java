@@ -1,7 +1,7 @@
 package io.app.stacktodobe.workspace.domain.usecase;
 
-import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.member.persistence.repository.MemberRepository;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
 import io.app.stacktodobe.workspace.adapter.model.InvalidCommandException;
 import io.app.stacktodobe.workspace.persistence.entity.Workspace;
 import io.app.stacktodobe.workspace.persistence.entity.WorkspaceMember;
@@ -42,8 +42,8 @@ public class WorkspaceCommandService implements WorkspaceCommandUseCase {
         //executor.execute(command);
 
         // 4) workspace_member 저장
-        if(!workspaceMemberRepository.existsByWorkspaceIdAndMemberId(workspace.getId(), owner.getId())){
-            workspaceMemberRepository.save(WorkspaceMember.createWorkspaceMember(workspace, owner, WorkspaceMemberRole.OWNER));
-        }
+//        if(!workspaceMemberRepository.existsByWorkspaceIdAndMemberId(workspace.getId(), owner.getId())){
+//            workspaceMemberRepository.save(WorkspaceMember.createWorkspaceMember(workspace, owner, WorkspaceMemberRole.OWNER));
+//        }
     }
 }

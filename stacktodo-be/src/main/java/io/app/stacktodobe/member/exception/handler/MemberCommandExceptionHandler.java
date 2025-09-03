@@ -1,7 +1,7 @@
-package io.app.stacktodobe.member.presentation.command.handler;
+package io.app.stacktodobe.member.exception.handler;
 
 
-import io.app.stacktodobe.member.adapter.model.InvalidCommandException;
+import io.app.stacktodobe.member.exception.InvalidCommandException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

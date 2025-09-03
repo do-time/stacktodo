@@ -1,6 +1,6 @@
-package io.app.stacktodobe.member.persistence.repository;
+package io.app.stacktodobe.member.adapter.out.persistence.repository;
 
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
