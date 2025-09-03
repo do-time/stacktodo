@@ -50,11 +50,10 @@ public class MemberFixtures {
                 new IssueTokenCommand(email, password),
                 AccessTokenCarrier.class);
 
-        String accessToken = requireNonNull(response.getBody()).accessToken();
-        return accessToken;
+        return requireNonNull(response.getBody()).accessToken();
     }
 
-    private void createMember(String email, String password) {
+    public void createMember(String email, String password) {
         var command = new MemberCreateCommand(
                 email,
                 password,

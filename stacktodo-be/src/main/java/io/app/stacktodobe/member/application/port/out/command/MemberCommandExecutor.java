@@ -17,7 +17,9 @@ public class MemberCommandExecutor {
 
     public void execute(MemberCreateCommand command, String hashedPassword) {
         validate(command);
-        saveMember.accept(MemberEntity.of(MemberCreateCommand.of(command), hashedPassword));
+        Member member = MemberCreateCommand.of(command);
+
+        saveMember.accept(MemberEntity.domainToEntity(member, hashedPassword));
     }
 
 

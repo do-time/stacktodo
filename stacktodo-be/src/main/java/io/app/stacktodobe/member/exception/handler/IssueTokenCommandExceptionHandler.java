@@ -1,5 +1,6 @@
 package io.app.stacktodobe.member.exception.handler;
 
+import io.app.stacktodobe.member.exception.InvalidCommandException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,10 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class IssueTokenCommandExceptionHandler {
 
-//    @ExceptionHandler(Exception.class)
-//    ResponseEntity<?> handle(RuntimeException e) {
-//        return ResponseEntity
-//                .badRequest()
-//                .body(e.getMessage());
-//    }
+    @ExceptionHandler(InvalidCommandException.class)
+    ResponseEntity<?> handleInvalidCommandException(InvalidCommandException e) {
+        return ResponseEntity
+                .badRequest()
+                .build();
+
+    }
 }

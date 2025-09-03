@@ -2,6 +2,7 @@ package io.app.stacktodobe.member;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,6 +13,7 @@ import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @E2eTest
+@DisplayName("POST /api/v1/members")
 public class POST_specs {
 
     @Test
