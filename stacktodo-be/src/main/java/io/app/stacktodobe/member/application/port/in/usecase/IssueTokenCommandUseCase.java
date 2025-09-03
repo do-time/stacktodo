@@ -30,7 +30,7 @@ public class IssueTokenCommandUseCase {
 
         String accessToken = Jwts
                 .builder()
-                .setSubject(memberEntity.getEmail())
+                .setSubject(memberEntity.getMemberId().toString())
                 .signWith(jwtKeyHolder.secretKey())
                 .compact();
         return new AccessTokenCarrier(accessToken);

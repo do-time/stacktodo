@@ -13,16 +13,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @E2eTest
 class Workspaces_POST_Specs {
+
     @Test
     @DisplayName("Work 생성 정상 요청시 204 NO_CONTENT")
     void create_returns_204(
-            @Autowired TestRestTemplate testRestTemplate,
-            @Autowired MemberRepository memberRepository
+            @Autowired MemberFixtures fixtures
     ){
-        Long ownerId = MemberFixtures.persistedMemberId(memberRepository);
+        Long ownerId = fixtures.createMemberAndGetMemberId();
         var command = WorkspaceFixtures.validCreateCommand(ownerId);
 
-        var response = testRestTemplate.postForEntity(
+        var response = fixtures.getClient().postForEntity(
                 "/api/v1/workspaces/create-workspace",
                 command,
                 Void.class);

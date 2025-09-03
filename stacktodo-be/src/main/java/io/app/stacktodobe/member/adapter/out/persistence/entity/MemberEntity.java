@@ -1,6 +1,7 @@
 package io.app.stacktodobe.member.adapter.out.persistence.entity;
 
 
+import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
 import io.app.stacktodobe.member.domain.Member;
 import jakarta.persistence.*;
@@ -15,12 +16,7 @@ import java.util.UUID;
 @Getter
 //@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @NoArgsConstructor
-public class MemberEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class MemberEntity extends BaseEntity {
 
     @Column(name = "member_id", unique = true, nullable = false)
     private UUID memberId;

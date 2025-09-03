@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(c -> c.jwt(jwt -> jwt.decoder(jwtDecoder)))
                 .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/api/v1/members").permitAll()
                         .requestMatchers("/api/v1/members/signup").permitAll()
                         .requestMatchers("/api/v1/members/issueToken").permitAll()
                         .requestMatchers("/api/v1/workspaces/**").permitAll()

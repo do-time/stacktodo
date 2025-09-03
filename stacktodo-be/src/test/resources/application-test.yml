@@ -21,8 +21,8 @@ logging:
 
 
 # H2 콘솔 — E2E 디버깅용
-# spring:
-#   h2:
-#     console:
-#       enabled: true
-#       path: /h2-console
+#spring:
+# h2:
+#   console:
+#     enabled: true
+#     path: /h2-console
