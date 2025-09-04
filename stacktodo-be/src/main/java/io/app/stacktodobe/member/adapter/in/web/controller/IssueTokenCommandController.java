@@ -1,7 +1,7 @@
 package io.app.stacktodobe.member.adapter.in.web.controller;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
-import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
 import io.app.stacktodobe.member.application.port.in.usecase.IssueTokenCommandUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

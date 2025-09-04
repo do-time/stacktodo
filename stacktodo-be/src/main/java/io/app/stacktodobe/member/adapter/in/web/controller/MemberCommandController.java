@@ -2,7 +2,7 @@ package io.app.stacktodobe.member.adapter.in.web.controller;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberDto;
 import io.app.stacktodobe.member.application.port.in.usecase.MemberCommandUseCase;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;

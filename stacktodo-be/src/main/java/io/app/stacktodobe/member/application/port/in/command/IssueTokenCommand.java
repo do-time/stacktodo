@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.adapter.in.web.dto;
+package io.app.stacktodobe.member.application.port.in.command;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

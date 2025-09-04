@@ -1,15 +1,13 @@
 package io.app.stacktodobe.member.support;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
-import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberView;
 import org.springframework.boot.test.web.client.LocalHostUriTemplateHandler;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Objects;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static io.app.stacktodobe.utils.TestSourceGenerator.generatePhoneNumber;
@@ -44,7 +42,7 @@ public class MemberFixtures {
         return requireNonNull(memberResponse.getBody()).id();
     }
 
-    private String issueToken(String email, String password) {
+    public String issueToken(String email, String password) {
         ResponseEntity<AccessTokenCarrier> response = client.postForEntity(
                 "/api/v1/members/issueToken",
                 new IssueTokenCommand(email, password),
@@ -57,7 +55,7 @@ public class MemberFixtures {
         var command = new MemberCreateCommand(
                 email,
                 password,
-                generateNickname(),
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );
@@ -75,10 +73,16 @@ public class MemberFixtures {
         return new MemberFixtures(client);
     }
 
-    private void setHeaderToken(String accessToken) {
+    public void setHeaderToken(String accessToken) {
         client.getRestTemplate().getInterceptors().add((request1, body, execution) -> {
             request1.getHeaders().add("Authorization", "Bearer " + accessToken);
             return execution.execute(request1, body);
         });
+    }
+
+    public void createMemberAndSetMemberAsDefaultUser(String email, String password) {
+        createMember(email, password);
+        String accessToken = issueToken(email, password);
+        setHeaderToken(accessToken);
     }
 }

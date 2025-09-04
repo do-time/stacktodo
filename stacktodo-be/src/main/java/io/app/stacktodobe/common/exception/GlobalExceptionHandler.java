@@ -49,3 +49,4 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 }
+

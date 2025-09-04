@@ -1,9 +1,11 @@
 package io.app.stacktodobe.member.adapter.in.web.dto;
 
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
+
 public record CreateMemberDto(
         String email,
         String password,
-        String nickname,
+        String username,
         String profileImage,
         String phoneNumber
 ) {
@@ -12,7 +14,7 @@ public record CreateMemberDto(
         return new MemberCreateCommand(
                 dto.email(),
                 dto.password(),
-                dto.nickname(),
+                dto.username(),
                 dto.profileImage(),
                 dto.phoneNumber()
         );

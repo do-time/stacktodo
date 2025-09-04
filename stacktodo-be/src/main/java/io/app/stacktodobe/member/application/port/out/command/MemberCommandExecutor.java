@@ -3,7 +3,7 @@ package io.app.stacktodobe.member.application.port.out.command;
 import io.app.stacktodobe.member.domain.Member;
 import io.app.stacktodobe.member.exception.InvalidCommandException;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 
 import java.util.function.Consumer;
 

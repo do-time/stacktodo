@@ -9,7 +9,7 @@ public class TestSourceGenerator {
     }
 
     public static String generatePassword() {
-        return generateComplexPassword(8);
+        return generateComplexPassword(12);
 
     }
 
@@ -17,7 +17,7 @@ public class TestSourceGenerator {
         String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String digits = "0123456789";
-        String special = "!@#$%^&*()-_=+[]{}|;:,.<>?";
+        String special = "!@#$%^*?";
 
         String all = upper + lower + digits + special;
         StringBuilder password = new StringBuilder();
@@ -34,7 +34,7 @@ public class TestSourceGenerator {
         return password.toString();
     }
 
-    public static String generateNickname() {
+    public static String generateUsername() {
         return UUID.randomUUID().toString();
     }
 

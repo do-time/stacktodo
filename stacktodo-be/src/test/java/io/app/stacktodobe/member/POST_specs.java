@@ -1,6 +1,6 @@
 package io.app.stacktodobe.member;
 
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 generatePassword(),
-                generateNickname(),
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );
@@ -51,7 +51,7 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 email,
          generatePassword(),
-         generateNickname(),
+         generateUsername(),
          generateProfileImage(),
          generatePhoneNumber()
         );
@@ -73,7 +73,7 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 password,
-                generateNickname(),
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );

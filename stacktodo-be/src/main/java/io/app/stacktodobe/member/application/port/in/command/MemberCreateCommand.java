@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.adapter.in.web.dto;
+package io.app.stacktodobe.member.application.port.in.command;
 
 
 import io.app.stacktodobe.member.domain.Member;
@@ -6,7 +6,7 @@ import io.app.stacktodobe.member.domain.Member;
 public record MemberCreateCommand(
         String email,
         String password,
-        String nickname,
+        String username,
         String profileImage,
         String phoneNumber
 ) {

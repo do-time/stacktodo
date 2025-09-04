@@ -5,15 +5,13 @@ import io.app.stacktodobe.member.exception.InvalidCommandException;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
-import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 @Service
@@ -31,17 +29,14 @@ public class IssueTokenCommandUseCase {
 
     public AccessTokenCarrier issueToken(IssueTokenCommand command) {
         // 입력값 검증
-        System.out.println("Validating input: " + command); // Debugging line
         validateInput(command);
         
         // 이메일로 회원 조회
         MemberEntity memberEntity = memberRepository.findByEmail(command.email())
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 이메일입니다: " + command.email()));
 
-        System.out.println("Found MemberEntity: " + memberEntity.getEmail() + " " + memberEntity.getHashedPassword()); // Debugging line
         // 비밀번호 검증
         if (passwordEncoder.matches(command.password(), memberEntity.getHashedPassword()) == false) {
-            System.out.println("Password mismatch for email: " + command.email()); // Debugging line
             throw new InvalidCommandException("비밀번호가 일치하지 않습니다");
         }
 

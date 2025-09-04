@@ -25,8 +25,8 @@ public class MemberEntity extends BaseEntity {
 
     private String hashedPassword;
 
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "profile_image")
     private String profileImage;
@@ -36,10 +36,11 @@ public class MemberEntity extends BaseEntity {
 
     public static MemberEntity domainToEntity(Member domain, String hashedPassword) {
         MemberEntity memberEntity = new MemberEntity();
+        System.out.println("domain :" + domain.toString());
         memberEntity.setMemberId(UUID.randomUUID());
         memberEntity.setHashedPassword(hashedPassword);
         memberEntity.setEmail(domain.getEmail());
-        memberEntity.setNickname(domain.getNickname());
+        memberEntity.setUsername(domain.getUsername());
         memberEntity.setProfileImage(domain.getProfileImage());
         memberEntity.setPhoneNumber(domain.getPhoneNumber());
 
