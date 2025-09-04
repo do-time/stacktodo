@@ -24,6 +24,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     //OAuth 로그인
     public PrincipalDetails(Member member, Map<String,Object> attributes) {
+        this.attributes = attributes;
         this.member = member;
     }
 
@@ -39,18 +40,22 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-        return getUsername();
+        return (String) attributes.get("username");
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return member.getUsername();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }
-
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return member.getAuthorities();
-//    }
 
 }

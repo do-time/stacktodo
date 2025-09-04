@@ -27,6 +27,17 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauth2User = super.loadUser(userRequest);
 
+
+        /** TODO
+         * OAuth2User 토큰 발급
+         * JWT 토큰을 직접 발급 받게 할것인지 아니면 google로 부터 받은 토큰을 사용할지 결정해야함
+         * redirect url을 통해 토큰 발급이 자동으로 이루어지도록 해야함.
+         * SUCCESS_REDIRECT_URL = "http://localhost:8080/oauth2/issueToken"
+         *
+         * userRequest.getAccessToken().getTokenValue();
+         */
+
+
         // 소셜 로그인 provider
         String provider = userRequest.getClientRegistration()
                 .getRegistrationId();
