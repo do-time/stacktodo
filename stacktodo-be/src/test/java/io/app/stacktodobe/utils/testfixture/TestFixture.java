@@ -3,13 +3,11 @@ package io.app.stacktodobe.utils.testfixture;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberDto;
-import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
 import org.springframework.boot.test.web.client.LocalHostUriTemplateHandler;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Objects;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static java.util.Objects.requireNonNull;
@@ -30,7 +28,7 @@ public record TestFixture(
         var request = new CreateMemberDto(
                 email,
                 password,
-                generateNickname(),
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );

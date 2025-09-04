@@ -3,7 +3,7 @@ package io.app.stacktodobe.member.application.port.in.usecase;
 
 import io.app.stacktodobe.member.application.port.out.command.MemberCommandExecutor;
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

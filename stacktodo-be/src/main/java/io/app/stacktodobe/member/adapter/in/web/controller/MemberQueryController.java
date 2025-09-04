@@ -5,11 +5,12 @@ import io.app.stacktodobe.member.adapter.in.web.dto.MemberView;
 import io.app.stacktodobe.member.application.port.in.usecase.MemberQueryUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.UUID;
 

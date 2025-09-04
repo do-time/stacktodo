@@ -1,8 +1,8 @@
 package io.app.stacktodobe.issuetoken;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
-import io.app.stacktodobe.member.adapter.in.web.dto.IssueTokenCommand;
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import io.app.stacktodobe.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
 import io.app.stacktodobe.utils.testfixture.TestFixture;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static io.app.stacktodobe.member.domain.Member.createMember;
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -34,7 +33,7 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        generateNickname(),
+                        generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),
                 Void.class
@@ -68,7 +67,7 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        generateNickname(),
+                        generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),
                 Void.class
@@ -284,7 +283,7 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        generateNickname(),
+                        generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),
                 Void.class
