@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
                 @Index(name = "idx_notification_entity", columnList = "entityType,entityId")
         })
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class Notification extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
