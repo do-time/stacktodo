@@ -2,12 +2,13 @@ package io.app.stacktodobe.workspace.command.support;
 
 import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
 
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class WorkspaceFixtures {
 
-    public static WorkspaceCreateCommand validCreateCommand(Long ownerId) {
-        return new WorkspaceCreateCommand(validName(), ownerId);
+    public static WorkspaceCreateCommand validCreateCommand(UUID ownerPublicId) {
+        return new WorkspaceCreateCommand(validName(), ownerPublicId);
     }
 
     public static String validName() {

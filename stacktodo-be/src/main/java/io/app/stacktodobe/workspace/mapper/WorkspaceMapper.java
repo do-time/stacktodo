@@ -17,7 +17,11 @@ public final class WorkspaceMapper {
         return new Workspace(workspaceId, cmd.name(), cmd.ownerPublicId());
     }
 
-    public static WorkspaceEntity toEntity(WorkspaceCreateCommand cmd, UUID workspaceId, Member member) {
-        return WorkspaceEntity.createWorkspace(cmd.name(), workspaceId, member);
+    public static Workspace toDomain(WorkspaceEntity entity) {
+        return Workspace.of(entity.getWorkspaceId(), entity.getName(), entity.getOwner().getMemberId());
+    }
+
+    public static WorkspaceEntity toEntity(Workspace workspace, Member member) {
+        return WorkspaceEntity.createWorkspace(workspace.name(), workspace.workspaceId(), member);
     }
 }

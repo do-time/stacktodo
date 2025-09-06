@@ -15,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Builder(access = AccessLevel.PRIVATE)
+@Getter
 public class WorkspaceEntity extends BaseEntity{
     @Column(nullable = false, length = 100)
     private String name;

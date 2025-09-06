@@ -18,6 +18,6 @@ public final class MemberFixtures {
                 generatePhoneNumber()
         );
 
-        return repo.save(Member.createMember(command)).getId();
+        return repo.save(Member.createMember(command, "password")).getId();
     }
 }

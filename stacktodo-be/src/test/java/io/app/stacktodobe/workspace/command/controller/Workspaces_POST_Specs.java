@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @E2eTest
@@ -20,7 +22,7 @@ class Workspaces_POST_Specs {
             @Autowired MemberRepository memberRepository
     ){
         Long ownerId = MemberFixtures.persistedMemberId(memberRepository);
-        var command = WorkspaceFixtures.validCreateCommand(ownerId);
+        var command = WorkspaceFixtures.validCreateCommand(UUID.randomUUID());
 
         var response = testRestTemplate.postForEntity(
                 "/api/v1/workspaces/create-workspace",

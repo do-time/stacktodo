@@ -3,8 +3,8 @@ package io.app.stacktodobe.task.adapter.out.persistence.entity;
 import io.app.stacktodobe.category.entity.Category;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.persistence.entity.Member;
-import io.app.stacktodobe.task.eums.TaskStatus;
-import io.app.stacktodobe.workspace.entity.Workspace;
+//import io.app.stacktodobe.task.eums.TaskStatus;
+//import io.app.stacktodobe.workspace.entity.Workspace;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -29,9 +29,9 @@ public class TaskEntity extends BaseEntity {
     @Lob
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "workspace_id", nullable = false)
-    private Workspace workspace;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "workspace_id", nullable = false)
+//    private Workspace workspace;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

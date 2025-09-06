@@ -5,7 +5,7 @@ import io.app.stacktodobe.category.persistence.repository.CategoryRepository;
 import io.app.stacktodobe.member.persistence.entity.Member;
 import io.app.stacktodobe.member.persistence.repository.MemberRepository;
 import io.app.stacktodobe.task.application.port.in.TaskUseCase;
-import io.app.stacktodobe.task.persistence.entity.Task;
+//import io.app.stacktodobe.task.persistence.entity.Task;
 import io.app.stacktodobe.task.adapter.out.persistence.repository.TaskRepository;
 import io.app.stacktodobe.task.application.command.TaskCreateCommand;
 import io.app.stacktodobe.workspace.exception.InvalidCommandException;
@@ -27,17 +27,17 @@ public class TaskService implements TaskUseCase {
     @Override
     public void createTask(TaskCreateCommand command) {
         // 1) 연관 엔티티 검증
-        Member owner = memberRepository.findById(command.ownerId())
-                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 사용자입니다: " + command.ownerId()));
-
-        WorkspaceEntity workspaceEntity = workspaceRepository.findById(command.workspaceId())
-                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
-
-        Category category = categoryRepository.findById(command.categoryId())
-                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
-
-        // 2) 저장
-        taskRepository.save(Task.createTask(command, workspaceEntity, category, owner));
+//        Member owner = memberRepository.findById(command.ownerId())
+//                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 사용자입니다: " + command.ownerId()));
+//
+//        WorkspaceEntity workspaceEntity = workspaceRepository.findById(command.workspaceId())
+//                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
+//
+//        Category category = categoryRepository.findById(command.categoryId())
+//                .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
+//
+//        // 2) 저장
+//        taskRepository.save(Task.createTask(command, workspaceEntity, category, owner));
 
 //        Category category = null;
 //        if (command.categoryId() != null) {

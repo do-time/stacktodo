@@ -14,7 +14,6 @@ import java.util.UUID;
 @Setter(value = AccessLevel.PRIVATE)
 @Getter
 //@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@NoArgsConstructor
 public class Member {
 
     @Id

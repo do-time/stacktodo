@@ -24,9 +24,9 @@ public class Category extends BaseEntity {
     @Lob
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private CategoryScope scope;
+//    @Enumerated(EnumType.STRING)
+//    @Column(nullable = false, length = 20)
+//    private CategoryScope scope;
 
     // scope='WORKSPACE'일 때만 값 존재
     @ManyToOne(fetch = FetchType.LAZY)
