@@ -4,11 +4,11 @@ import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.category.persistence.repository.CategoryRepository;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
+import io.app.stacktodobe.task.adapter.model.InvalidCommandException;
 import io.app.stacktodobe.task.persistence.repository.TaskRepository;
 import io.app.stacktodobe.task.presentation.command.TaskCreateCommand;
-import io.app.stacktodobe.workspace.adapter.model.InvalidCommandException;
-import io.app.stacktodobe.workspace.persistence.entity.Workspace;
-import io.app.stacktodobe.workspace.persistence.repository.WorkspaceRepository;
+import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
+import io.app.stacktodobe.workspace.adapter.out.persistence.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class TaskCommandService implements TaskCommandUsecase{
         MemberEntity owner = memberRepository.findById(command.ownerId())
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 사용자입니다: " + command.ownerId()));
 
-        Workspace workspace = workspaceRepository.findById(command.workspaceId())
+        WorkspaceEntity workspaceEntity = workspaceRepository.findById(command.workspaceId())
                 .orElseThrow(() -> new InvalidCommandException("존재하지 않는 워크스페이스입니다: " + command.workspaceId()));
 
         Category category = categoryRepository.findById(command.categoryId())

@@ -9,6 +9,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 
+import java.util.UUID;
+
 import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static io.app.stacktodobe.utils.TestSourceGenerator.generatePhoneNumber;
 import static io.app.stacktodobe.utils.TestSourceGenerator.generateProfileImage;
@@ -26,7 +28,7 @@ public class MemberFixtures {
         return client;
     }
 
-    public Long createMemberAndGetMemberId() {
+    public UUID createMemberAndGetMemberId() {
         String email = generateEmail();
         String password = generatePassword();
         createMember(email, password);
@@ -39,7 +41,7 @@ public class MemberFixtures {
                 "/api/v1/members/me",
                 MemberView.class
         );
-        return requireNonNull(memberResponse.getBody()).id();
+        return requireNonNull(memberResponse.getBody()).memberId();
     }
 
     public String issueToken(String email, String password) {
