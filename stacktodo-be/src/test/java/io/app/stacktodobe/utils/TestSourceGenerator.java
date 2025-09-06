@@ -1,6 +1,7 @@
 package io.app.stacktodobe.utils;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TestSourceGenerator {
 
@@ -43,5 +44,11 @@ public class TestSourceGenerator {
     }
     public static String generatePhoneNumber() {
         return "+82-" + (100000000 + (int) (Math.random() * 900000000));
+    }
+
+    public static String generateWorkspaceName() {
+        String random = Long.toString(ThreadLocalRandom.current().nextLong(Long.MAX_VALUE), 16); // 0-9a-z
+        String name = "ws-" + random;
+        return name.length() <= 100 ? name : name.substring(0, 100);
     }
 }
