@@ -1,6 +1,6 @@
 package io.app.stacktodobe.workspace.adapter.in.web.controller;
 
-import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceCreateRequestDto;
+import io.app.stacktodobe.workspace.adapter.in.web.dto.CreateWorkspaceDto;
 import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
 import io.app.stacktodobe.workspace.application.port.in.WorkspaceUseCase;
 import io.app.stacktodobe.workspace.mapper.WorkspaceMapper;
@@ -18,7 +18,7 @@ public class WorkspaceController {
     private final WorkspaceUseCase workspaceUseCase;
 
     @PostMapping("/create-workspace")
-    public ResponseEntity<?> create(@RequestBody WorkspaceCreateRequestDto dto) {
+    public ResponseEntity<?> create(@RequestBody CreateWorkspaceDto dto) {
         WorkspaceCreateCommand command = WorkspaceMapper.toCreateCommand(dto);
         workspaceUseCase.create(command);
         return ResponseEntity.noContent().build();

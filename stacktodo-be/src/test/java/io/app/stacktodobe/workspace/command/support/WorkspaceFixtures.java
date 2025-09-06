@@ -1,7 +1,6 @@
 package io.app.stacktodobe.workspace.command.support;
 
 
-import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceCreateRequestDto;
 import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
