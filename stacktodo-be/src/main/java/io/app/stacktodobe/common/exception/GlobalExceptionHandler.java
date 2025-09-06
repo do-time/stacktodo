@@ -1,6 +1,8 @@
 package io.app.stacktodobe.common.exception;
 
 import io.app.stacktodobe.member.exception.InvalidCommandException;
+import io.app.stacktodobe.common.exception.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -46,6 +48,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleInvalidCommandException(InvalidCommandException e) {
         return ResponseEntity
                 .badRequest()
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
                 .body(e.getMessage());
     }
 }
