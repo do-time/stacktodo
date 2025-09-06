@@ -1,4 +1,4 @@
-package io.app.stacktodobe.workspace.adapter.model;
+package io.app.stacktodobe.workspace.exception;
 
 public class InvalidCommandException extends RuntimeException {
     public InvalidCommandException(String message) {
