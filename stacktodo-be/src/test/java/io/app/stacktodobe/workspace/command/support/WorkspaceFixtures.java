@@ -1,19 +1,27 @@
 package io.app.stacktodobe.workspace.command.support;
 
-import io.app.stacktodobe.workspace.presentation.command.WorkspaceCreateCommand;
 
-import java.util.concurrent.ThreadLocalRandom;
+import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceCreateRequestDto;
+import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+
+import java.util.UUID;
+
+import static io.app.stacktodobe.utils.TestSourceGenerator.*;
+
 
 public final class WorkspaceFixtures {
+    private final TestRestTemplate client;
 
-    public static WorkspaceCreateCommand validCreateCommand(Long ownerId) {
-        return new WorkspaceCreateCommand(validName(), ownerId);
+    private WorkspaceFixtures(TestRestTemplate client) {
+        this.client = client;
     }
 
-    public static String validName() {
-        String random = Long.toString(ThreadLocalRandom.current().nextLong(Long.MAX_VALUE), 16); // 0-9a-z
-        String name = "ws-" + random;
-        return name.length() <= 100 ? name : name.substring(0, 100);
+    public TestRestTemplate getClient() {
+        return client;
+    }
+    public WorkspaceCreateCommand validCreateCommand(UUID ownerPublicId) {
+        return new WorkspaceCreateCommand(generateWorkspaceName(), ownerPublicId);
     }
 }
 

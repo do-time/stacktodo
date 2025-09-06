@@ -1,4 +1,6 @@
-package io.app.stacktodobe.workspace.presentation.command;
+package io.app.stacktodobe.workspace.application.command;
+
+import java.util.UUID;
 
 public record WorkspaceCreateCommand(
         @jakarta.validation.constraints.NotBlank
@@ -6,5 +8,5 @@ public record WorkspaceCreateCommand(
         String name,
 
         @jakarta.validation.constraints.NotNull
-        Long ownerId
+        UUID ownerPublicId
 ) {}

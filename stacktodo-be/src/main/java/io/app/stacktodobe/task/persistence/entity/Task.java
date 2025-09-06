@@ -3,7 +3,7 @@ package io.app.stacktodobe.task.persistence.entity;
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
-import io.app.stacktodobe.workspace.persistence.entity.Workspace;
+import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -30,7 +30,7 @@ public class Task extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_id", nullable = false)
-    private Workspace workspace;
+    private WorkspaceEntity workspaceEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
