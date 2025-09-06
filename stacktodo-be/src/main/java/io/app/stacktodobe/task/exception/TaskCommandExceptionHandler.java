@@ -1,4 +1,4 @@
-package io.app.stacktodobe.task.presentation.command.handler;
+package io.app.stacktodobe.task.exception;
 
 import io.app.stacktodobe.member.exception.InvalidCommandException;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package io.app.stacktodobe.task.persistence.entity;
+package io.app.stacktodobe.task.adapter.out.persistence.entity;
 
 /**
  * 작업(Task) 상태

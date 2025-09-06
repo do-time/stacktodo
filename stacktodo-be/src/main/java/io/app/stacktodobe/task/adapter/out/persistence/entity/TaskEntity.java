@@ -1,4 +1,4 @@
-package io.app.stacktodobe.task.persistence.entity;
+package io.app.stacktodobe.task.adapter.out.persistence.entity;
 
 import io.app.stacktodobe.category.persistence.entity.Category;
 import io.app.stacktodobe.common.entity.BaseEntity;
@@ -12,15 +12,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tasks")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Task extends BaseEntity {
+public class TaskEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "task_id", unique = true, nullable = false)
+    private UUID publicId;
 
     @Column(length = 255, nullable = false)
     private String title;
@@ -30,7 +34,7 @@ public class Task extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_id", nullable = false)
-    private WorkspaceEntity workspaceEntity;
+    private WorkspaceEntity workspace;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

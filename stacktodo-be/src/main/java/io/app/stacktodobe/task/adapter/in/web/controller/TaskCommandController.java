@@ -1,7 +1,8 @@
-package io.app.stacktodobe.task.command.controller;
+package io.app.stacktodobe.task.adapter.in.web.controller;
 
-import io.app.stacktodobe.task.domain.usecase.TaskCommandUsecase;
-import io.app.stacktodobe.task.presentation.command.TaskCreateCommand;
+import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
+import io.app.stacktodobe.task.application.port.in.TaskCommandUseCase;
+import io.app.stacktodobe.task.application.command.TaskCreateCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/tasks")
 public class TaskCommandController {
-    private final TaskCommandUsecase taskCommandUsecase;
+    private final TaskCommandUseCase taskCommandUsecase;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTask(@RequestBody TaskCreateCommand command){
-        taskCommandUsecase.createTask(command);
+    public ResponseEntity<?> createTask(@RequestBody CreateTaskDto request){
+        TaskCreateCommand cmd = TaskCreateCommand.of(request);
+
+        taskCommandUsecase.create(cmd);
+
         return ResponseEntity.noContent().build();
     }
 }

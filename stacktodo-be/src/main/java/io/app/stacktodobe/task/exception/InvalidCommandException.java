@@ -1,4 +1,4 @@
-package io.app.stacktodobe.task.adapter.model;
+package io.app.stacktodobe.task.exception;
 
 public class InvalidCommandException extends RuntimeException {
     public InvalidCommandException(String message) {
