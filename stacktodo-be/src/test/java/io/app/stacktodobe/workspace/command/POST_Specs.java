@@ -2,7 +2,7 @@ package io.app.stacktodobe.workspace.command;
 
 import io.app.stacktodobe.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
-import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceCreateRequestDto;
+import io.app.stacktodobe.workspace.adapter.in.web.dto.CreateWorkspaceDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class POST_Specs {
     void create_returns_204(@Autowired MemberFixtures memberFixtures, @Autowired TestRestTemplate testRestTemplate){
         //arrange
         UUID ownerId = memberFixtures.createMemberAndGetMemberId();
-        var dto = new WorkspaceCreateRequestDto(generateWorkspaceName(), ownerId);
+        var dto = new CreateWorkspaceDto(generateWorkspaceName(), ownerId);
 
         //act
         var response = testRestTemplate.postForEntity(
@@ -40,7 +40,7 @@ class POST_Specs {
         //arrange
         UUID nonExistingOwnerId = UUID.randomUUID();
 
-        var dto = new WorkspaceCreateRequestDto(generateWorkspaceName(), nonExistingOwnerId);
+        var dto = new CreateWorkspaceDto(generateWorkspaceName(), nonExistingOwnerId);
 
         //act
         var response = testRestTemplate.postForEntity(
@@ -59,7 +59,7 @@ class POST_Specs {
     void create_withDuplicateName_returns_409(@Autowired MemberFixtures memberFixtures, @Autowired TestRestTemplate testRestTemplate) {
         //arrange
         UUID ownerId = memberFixtures.createMemberAndGetMemberId();
-        var dto = new WorkspaceCreateRequestDto(generateWorkspaceName(), ownerId);
+        var dto = new CreateWorkspaceDto(generateWorkspaceName(), ownerId);
 
         //act
         // 첫 번째 워크스페이스 생성 (정상)

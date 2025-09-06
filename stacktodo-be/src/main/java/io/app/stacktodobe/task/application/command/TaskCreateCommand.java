@@ -1,8 +1,13 @@
-package io.app.stacktodobe.task.presentation.command;
+package io.app.stacktodobe.task.application.command;
+
+import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
+@Builder
 public record TaskCreateCommand(
 
         // 필수: 제목(255자)
@@ -15,16 +20,16 @@ public record TaskCreateCommand(
 
         // 필수: 소속 워크스페이스
         @jakarta.validation.constraints.NotNull
-        Long workspaceId,
+        UUID workspaceId,
 
         // 선택: 카테고리
-        Long categoryId,
+        UUID categoryId,
 
         // 필수: 담당자(소유자)
-        Long ownerId,
+        UUID ownerId,
 
         // 선택: 템플릿에서 복사한 경우의 템플릿(Category) ID
-        Long templateId,
+        UUID templateId,
 
         // 선택: 마감일/시간
         LocalDate dueDate,
@@ -44,4 +49,21 @@ public record TaskCreateCommand(
         // 선택: 반복 규칙(RRULE 등)
         @jakarta.validation.constraints.Size(max = 255)
         String recurrenceRule
-) {}
+) {
+    public static TaskCreateCommand of(CreateTaskDto dto) {
+        return TaskCreateCommand.builder()
+                .title(dto.title())
+                .description(dto.description())
+                .workspaceId(dto.workspaceId())
+                .categoryId(dto.categoryId())
+                .ownerId(dto.ownerId())
+                .templateId(dto.templateId())
+                .dueDate(dto.dueDate())
+                .dueTime(dto.dueTime())
+                .priority(dto.priority() != null ? dto.priority() : 3) // 기본값 3
+                .isComplete(dto.isComplete() != null ? dto.isComplete() : false)
+                .isRoutine(dto.isRoutine() != null ? dto.isRoutine() : false)
+                .recurrenceRule(dto.recurrenceRule())
+                .build();
+    }
+}
