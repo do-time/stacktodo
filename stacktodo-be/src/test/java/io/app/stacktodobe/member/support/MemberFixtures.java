@@ -57,6 +57,7 @@ public class MemberFixtures {
         var command = new MemberCreateCommand(
                 email,
                 password,
+                null,
                 generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()

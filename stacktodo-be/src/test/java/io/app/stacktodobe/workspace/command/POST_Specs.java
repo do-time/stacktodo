@@ -31,7 +31,7 @@ class POST_Specs {
                 Void.class);
 
         //assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(204);
+        assertThat(response.getStatusCode().value()).isEqualTo(204);
     }
 
     @Test
@@ -50,7 +50,7 @@ class POST_Specs {
         );
 
         //assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+        assertThat(response.getStatusCode().value()).isEqualTo(404);
     }
 
 
@@ -68,7 +68,7 @@ class POST_Specs {
                 dto,
                 Void.class
         );
-        assertThat(firstResponse.getStatusCodeValue()).isEqualTo(204);
+        assertThat(firstResponse.getStatusCode().value()).isEqualTo(204);
 
         // 같은 이름으로 다시 생성 요청
         var duplicateResponse = testRestTemplate.postForEntity(
@@ -78,6 +78,6 @@ class POST_Specs {
         );
 
         //assert
-        assertThat(duplicateResponse.getStatusCodeValue()).isEqualTo(409);
+        assertThat(duplicateResponse.getStatusCode().value()).isEqualTo(409);
     }
 }

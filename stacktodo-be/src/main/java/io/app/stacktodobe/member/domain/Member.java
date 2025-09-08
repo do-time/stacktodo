@@ -17,10 +17,11 @@ public class Member {
     private String email;
     private UUID memberId;
     private String password;
+    @Setter(AccessLevel.PUBLIC)
+    private String hashedPassword;
     private String username;
     private String profileImage;
     private String phoneNumber;
-
     private String provider;
     private String providerId;
     private String role;
