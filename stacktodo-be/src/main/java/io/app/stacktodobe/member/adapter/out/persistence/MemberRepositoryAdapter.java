@@ -8,11 +8,11 @@ import io.app.stacktodobe.member.application.port.out.query.MemberQueryPort;
 import io.app.stacktodobe.member.application.port.out.query.MemberQueryProcessor;
 import io.app.stacktodobe.member.domain.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-@Component
+@Repository
 @RequiredArgsConstructor
 public class MemberRepositoryAdapter implements MemberCreatePort, MemberQueryPort {
     private final MemberRepository memberRepository;
