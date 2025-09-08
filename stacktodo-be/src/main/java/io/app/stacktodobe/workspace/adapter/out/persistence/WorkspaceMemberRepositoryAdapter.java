@@ -36,7 +36,7 @@ public class WorkspaceMemberRepositoryAdapter implements CreateWorkspaceMemberPo
         var workspace = workspaceRepository.findByWorkspaceId(workspaceId)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 워크스페이스입니다."));
 
-        var entity = WorkspaceMemberEntity.of(workspace, member, role);
+        var entity = WorkspaceMemberEntity.of(workspace, member.getMemberId(), role);
         var saved = workspaceMemberRepository.save(entity);
     }
 }

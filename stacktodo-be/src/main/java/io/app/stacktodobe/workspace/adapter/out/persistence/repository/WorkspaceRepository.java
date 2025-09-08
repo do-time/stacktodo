@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface WorkspaceRepository extends JpaRepository<WorkspaceEntity, Long> {
-    boolean existsByOwner_IdAndNameIgnoreCase(Long ownerId, String name);
+    boolean existsByOwnerIdAndNameIgnoreCase(UUID ownerId, String name);
     Optional<WorkspaceEntity> findByWorkspaceId(UUID workspaceId);
+    Optional<WorkspaceEntity> findByName(String name);
+
 }
