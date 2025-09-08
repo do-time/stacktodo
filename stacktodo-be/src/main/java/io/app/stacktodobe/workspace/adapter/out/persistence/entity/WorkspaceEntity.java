@@ -1,12 +1,11 @@
 package io.app.stacktodobe.workspace.adapter.out.persistence.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "workspace",
@@ -23,15 +22,22 @@ public class WorkspaceEntity extends BaseEntity{
     @Column(name = "workspace_id", unique = true, nullable = false)
     private UUID workspaceId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "owner_id", nullable = false)
-    private MemberEntity owner;
+    @Column(name = "owner_id", nullable = false, columnDefinition = "BINARY(16)")
+    private UUID ownerId;
 
-    public static WorkspaceEntity createWorkspace(String name, UUID workspaceId, MemberEntity owner) {
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @Builder.Default
+    private Set<WorkspaceMemberEntity> members = new HashSet<>();
+
+    public void addMember(UUID memberId, WorkspaceMemberRole role) {
+        this.members.add(WorkspaceMemberEntity.of(this, memberId, role));
+    }
+
+    public static WorkspaceEntity of(String name, UUID workspaceId, UUID ownerId) {
         return WorkspaceEntity.builder()
                 .name(name)
                 .workspaceId(workspaceId)
-                .owner(owner)
+                .ownerId(ownerId)
                 .build();
     }
 }

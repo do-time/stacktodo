@@ -8,13 +8,13 @@ import java.util.UUID;
 @Builder
 public record WorkspaceMember (
     UUID workspaceId,
-    UUID ownerPublicId,
+    UUID memberId,
     WorkspaceMemberRole role
 ){
-        public static WorkspaceMember of(UUID workspaceId, UUID ownerPublicId, WorkspaceMemberRole role) {
+        public static WorkspaceMember of(UUID workspaceId, UUID memberId, WorkspaceMemberRole role) {
             return WorkspaceMember.builder()
                     .workspaceId(workspaceId)
-                    .ownerPublicId(ownerPublicId)
+                    .memberId(memberId)
                     .role(role)
                     .build();
         }
