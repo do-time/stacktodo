@@ -50,7 +50,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         if (user.isEmpty()) {
             log.info("First time social login. Creating new user.");
 
-            MemberEntity memberEntity = MemberEntity.domainToEntity(member, "NO_PWD");
+            MemberEntity memberEntity = MemberEntity.domainToEntity(member);
 
             // oauth2User.getAttributes() 정보로 회원가입 처리
             memberRepository.save(memberEntity);

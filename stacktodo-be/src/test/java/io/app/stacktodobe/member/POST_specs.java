@@ -24,7 +24,6 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 generatePassword(),
-                null,
                 generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
@@ -52,7 +51,6 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 email,
          generatePassword(),
-         null,
          generateUsername(),
          generateProfileImage(),
          generatePhoneNumber()
@@ -75,7 +73,6 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 password,
-                null,
                 generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()

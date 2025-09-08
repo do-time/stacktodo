@@ -33,7 +33,6 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        null,
                         generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),
@@ -68,7 +67,6 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        null,
                         generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),
@@ -285,7 +283,6 @@ class POST_specs {
                 new MemberCreateCommand(
                         email,
                         password,
-                        null,
                         generateUsername(),
                         generateProfileImage(),
                         generatePhoneNumber()),

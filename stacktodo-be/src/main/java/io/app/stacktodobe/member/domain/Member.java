@@ -16,7 +16,6 @@ public class Member {
 
     private String email;
     private UUID memberId;
-    private String password;
     @Setter(AccessLevel.PUBLIC)
     private String hashedPassword;
     private String username;
@@ -32,7 +31,6 @@ public class Member {
         Member member = new Member();
         member.setMemberId(UUID.randomUUID());
         member.setEmail(command.email());
-        member.setPassword(command.password());
         member.setUsername(command.username());
         member.setProfileImage(command.profileImage());
         member.setPhoneNumber(command.phoneNumber());

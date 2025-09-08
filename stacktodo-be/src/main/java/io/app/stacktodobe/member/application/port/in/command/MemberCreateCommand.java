@@ -6,7 +6,6 @@ import io.app.stacktodobe.member.domain.Member;
 public record MemberCreateCommand(
         String email,
         String password,
-        String hashedPassword,
         String username,
         String profileImage,
         String phoneNumber

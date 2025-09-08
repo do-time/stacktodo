@@ -34,11 +34,10 @@ public class MemberEntity extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public static MemberEntity domainToEntity(Member domain, String hashedPassword) {
+    public static MemberEntity domainToEntity(Member domain) {
         MemberEntity memberEntity = new MemberEntity();
-        System.out.println("domain :" + domain.toString());
         memberEntity.setMemberId(UUID.randomUUID());
-        memberEntity.setHashedPassword(hashedPassword);
+        memberEntity.setHashedPassword(domain.getHashedPassword());
         memberEntity.setEmail(domain.getEmail());
         memberEntity.setUsername(domain.getUsername());
         memberEntity.setProfileImage(domain.getProfileImage());
