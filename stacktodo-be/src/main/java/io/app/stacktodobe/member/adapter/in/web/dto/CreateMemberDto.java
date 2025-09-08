@@ -14,6 +14,7 @@ public record CreateMemberDto(
         return new MemberCreateCommand(
                 dto.email(),
                 dto.password(),
+                null,
                 dto.username(),
                 dto.profileImage(),
                 dto.phoneNumber()
