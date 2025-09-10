@@ -49,21 +49,4 @@ public record TaskCreateCommand(
         // 선택: 반복 규칙(RRULE 등)
         @jakarta.validation.constraints.Size(max = 255)
         String recurrenceRule
-) {
-    public static TaskCreateCommand of(CreateTaskDto dto) {
-        return TaskCreateCommand.builder()
-                .title(dto.title())
-                .description(dto.description())
-                .workspaceId(dto.workspaceId())
-                .categoryId(dto.categoryId())
-                .ownerId(dto.ownerId())
-                .templateId(dto.templateId())
-                .dueDate(dto.dueDate())
-                .dueTime(dto.dueTime())
-                .priority(dto.priority() != null ? dto.priority() : 3) // 기본값 3
-                .isComplete(dto.isComplete() != null ? dto.isComplete() : false)
-                .isRoutine(dto.isRoutine() != null ? dto.isRoutine() : false)
-                .recurrenceRule(dto.recurrenceRule())
-                .build();
-    }
-}
+) {}
