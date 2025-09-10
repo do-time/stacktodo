@@ -1,6 +1,6 @@
 package io.app.stacktodobe.tasklist.persistence.entity;
 
-import io.app.stacktodobe.category.persistence.entity.Category;
+import io.app.stacktodobe.category.adapter.out.persistence.entity.CategoryEntity;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
@@ -42,7 +42,7 @@ public class TaskList extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    private Category category;
+    private CategoryEntity categoryEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

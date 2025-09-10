@@ -1,6 +1,6 @@
 package io.app.stacktodobe.task.adapter.out.persistence.entity;
 
-import io.app.stacktodobe.category.persistence.entity.Category;
+import io.app.stacktodobe.category.adapter.out.persistence.entity.CategoryEntity;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
@@ -38,7 +38,7 @@ public class TaskEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    private Category category;
+    private CategoryEntity categoryEntity;
 
     // 담당자(소유자)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,7 +48,7 @@ public class TaskEntity extends BaseEntity {
     // 템플릿에서 복사된 경우
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "template_id")
-    private Category template;
+    private CategoryEntity template;
 
     private LocalDate dueDate;
     private LocalTime dueTime;
