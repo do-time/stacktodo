@@ -1,9 +1,8 @@
 package io.app.stacktodobe.task.adapter.out.persistence.entity;
 
-import io.app.stacktodobe.category.persistence.entity.Category;
+import io.app.stacktodobe.category.adapter.out.persistence.entity.CategoryEntity;
 import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
-import io.app.stacktodobe.task.domain.model.TaskStatus;
 import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -20,8 +19,12 @@ import java.util.UUID;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 @EntityListeners(AuditingEntityListener.class)
 public class TaskEntity extends BaseEntity {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "task_id", unique = true, nullable = false)
-    private UUID taskId;
+    private UUID publicId;
 
     @Column(length = 255, nullable = false)
     private String title;
@@ -29,20 +32,23 @@ public class TaskEntity extends BaseEntity {
     @Lob
     private String description;
 
-    @Column(name = "workspace_id", nullable = false)
-    private UUID workspaceId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "workspace_id", nullable = false)
+    private WorkspaceEntity workspace;
 
-    @Column(name = "category_id")
-    private UUID categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private CategoryEntity categoryEntity;
 
     // 담당자(소유자)
-    @Column(name = "owner_id")
-    private UUID ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private MemberEntity owner;
 
     // 템플릿에서 복사된 경우
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "template_id")
-//    private Category template;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "template_id")
+    private CategoryEntity template;
 
     private LocalDate dueDate;
     private LocalTime dueTime;
