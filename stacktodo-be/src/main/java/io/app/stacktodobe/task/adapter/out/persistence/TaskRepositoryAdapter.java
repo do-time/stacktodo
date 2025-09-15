@@ -20,7 +20,8 @@ public class TaskRepositoryAdapter implements CreateTaskPort, UpdateTaskPort {
 
     @Override
     public Task create(Task task) {
-        return null;
+        var created = taskRepository.save(TaskMapper.toEntity(task));
+        return TaskMapper.toDomain(created);
     }
 
     @Override

@@ -1,28 +1,31 @@
 package io.app.stacktodobe.task.application.service;
 
 import io.app.stacktodobe.task.application.port.in.CreateTaskUseCase;
-import io.app.stacktodobe.task.application.command.TaskCreateCommand;
+import io.app.stacktodobe.task.application.command.CreateTaskCommand;
+import io.app.stacktodobe.task.application.port.out.CreateTaskPort;
+import io.app.stacktodobe.task.domain.model.Task;
 import io.app.stacktodobe.workspace.application.port.out.WorkspaceQueryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CreateTaskService implements CreateTaskUseCase {
-//    private final MemberQueryPort memberQueryPort;
-    private final WorkspaceQueryPort workspaceQueryPort;
-//    private final CategoryQueryPort categoryQueryPort;
+    private final CreateTaskPort createTaskPort;
 
     @Override
-    public void create(TaskCreateCommand cmd) {
+    public void create(CreateTaskCommand cmd) {
 
-//
-//        UUID categoryPublicId = (cmd.categoryId() != null)
-//                ? categoryQueryPort.findPublicIdById(cmd.categoryId())
-//                : null;
-//
-//        UUID templatePublicId = (cmd.templateId() != null)
-//                ? categoryQueryPort.findPublicIdById(cmd.templateId())
-//                : null;
+        //member 검증
+
+        //workspace 검증
+
+        //category 검증
+
+        var task = Task.create(cmd);
+
+        var created = createTaskPort.create(task);
     }
 }

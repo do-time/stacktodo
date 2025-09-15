@@ -1,6 +1,5 @@
 package io.app.stacktodobe.task.application.command;
 
-import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -8,7 +7,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Builder
-public record TaskCreateCommand(
+public record CreateTaskCommand(
 
         // 필수: 제목(255자)
         @jakarta.validation.constraints.NotBlank
@@ -30,6 +29,10 @@ public record TaskCreateCommand(
 
         // 선택: 템플릿에서 복사한 경우의 템플릿(Category) ID
         UUID templateId,
+
+        // 선택: 시작일/시간
+        LocalDate startDate,
+        LocalTime startTime,
 
         // 선택: 마감일/시간
         LocalDate dueDate,

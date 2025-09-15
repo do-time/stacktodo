@@ -1,6 +1,6 @@
 package io.app.stacktodobe.task.domain.model;
 
-import io.app.stacktodobe.task.application.command.TaskCreateCommand;
+import io.app.stacktodobe.task.application.command.CreateTaskCommand;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,6 +16,8 @@ public class Task {
 
     private String title;                // 필수, 255자 제한
     private String description;          // 선택
+    private LocalDate startDate;
+    private LocalTime startTime;
     private LocalDate dueDate;
     private LocalTime dueTime;
     private int priority;                // 1~5, 기본값 3
@@ -31,6 +33,8 @@ public class Task {
                  UUID templateCategoryId,
                  String title,
                  String description,
+                 LocalDate startDate,
+                 LocalTime startTime,
                  LocalDate dueDate,
                  LocalTime dueTime,
                  int priority,
@@ -46,6 +50,8 @@ public class Task {
         this.templateCategoryId = templateCategoryId;
         this.title = validateTitle(title);
         this.description = description;
+        this.startDate = startDate;
+        this.startTime = startTime;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.priority = normalizePriority(priority);
@@ -57,19 +63,17 @@ public class Task {
         enforceStatusPercentInvariant();
     }
 
-    public static Task create(UUID workspaceId,
-                              UUID ownerId,
-                              UUID categoryId,
-                              UUID templateCategoryId,
-                              TaskCreateCommand cmd) {
+    public static Task create(CreateTaskCommand cmd) {
         return new Task(
                 UUID.randomUUID(),
-                workspaceId,
-                categoryId,
-                ownerId,
-                templateCategoryId,
+                cmd.workspaceId(),
+                cmd.categoryId(),
+                cmd.ownerId(),
+                cmd.templateId(),
                 cmd.title(),
                 cmd.description(),
+                cmd.startDate() != null ? cmd.startDate() : LocalDate.now(),
+                cmd.startTime(),
                 cmd.dueDate(),
                 cmd.dueTime(),
                 cmd.priority() != null ? cmd.priority() : 3,
@@ -88,6 +92,8 @@ public class Task {
             UUID templateCategoryId,
             String title,
             String description,
+            LocalDate startDate,
+            LocalTime startTime,
             LocalDate dueDate,
             LocalTime dueTime,
             int priority,
@@ -104,6 +110,8 @@ public class Task {
                 templateCategoryId,
                 title,
                 description,
+                startDate,
+                startTime,
                 dueDate,
                 dueTime,
                 priority,
@@ -113,6 +121,24 @@ public class Task {
                 status
         );
     }
+    // ====== Getter ======
+    public UUID getTaskId() { return taskId; }
+    public UUID getWorkspaceId() { return workspaceId; }
+    public UUID getCategoryId() { return categoryId; }
+    public UUID getOwnerId() { return ownerId; }
+    public UUID getTemplateCategoryId() { return templateCategoryId; }
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+    public LocalDate getStartDate() { return startDate; }
+    public LocalTime getStartTime() { return startTime; }
+    public LocalDate getDueDate() { return dueDate; }
+    public LocalTime getDueTime() { return dueTime; }
+    public int getPriority() { return priority; }
+    public int getPercentComplete() { return percentComplete; }
+    public boolean isRoutine() { return routine; }
+    public String getRecurrenceRule() { return recurrenceRule; }
+    public TaskStatus getStatus() { return status; }
+
 
     // ====== 도메인 로직 ======
 
@@ -128,6 +154,30 @@ public class Task {
             return;
         }
         this.status = TaskStatus.PENDING;
+    }
+
+    /** 시작 날짜만 교체 */
+    public void changeStartDate(LocalDate newStartDate) {
+        this.startDate = newStartDate;
+        validateChronology();
+    }
+
+    /** 시작 시간만 교체 */
+    public void changeStartTime(LocalTime newStartTime) {
+        this.startTime = newStartTime;
+        validateChronology();
+    }
+
+    /** 마감 날짜만 교체 */
+    public void changeDueDate(LocalDate newDueDate) {
+        this.dueDate = newDueDate;
+        validateChronology();
+    }
+
+    /** 마감 시간만 교체 */
+    public void changeDueTime(LocalTime newDueTime) {
+        this.dueTime = newDueTime;
+        validateChronology();
     }
 
     /** 진행률 업데이트: 0→PENDING, 1~99→IN_PROGRESS, 100→COMPLETED */
@@ -162,7 +212,9 @@ public class Task {
         this.priority = normalizePriority(newPriority);
     }
 
+
     // ====== 불변식/검증 ======
+
     private void enforceStatusPercentInvariant() {
         // status와 percent의 일관성 강제
         switch (this.status) {
@@ -200,19 +252,27 @@ public class Task {
         return Math.max(0, Math.min(100, v));
     }
 
-    // ====== Getter ======
-    public UUID getTaskId() { return taskId; }
-    public UUID getWorkspaceId() { return workspaceId; }
-    public UUID getCategoryId() { return categoryId; }
-    public UUID getOwnerId() { return ownerId; }
-    public UUID getTemplateCategoryId() { return templateCategoryId; }
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public LocalDate getDueDate() { return dueDate; }
-    public LocalTime getDueTime() { return dueTime; }
-    public int getPriority() { return priority; }
-    public int getPercentComplete() { return percentComplete; }
-    public boolean isRoutine() { return routine; }
-    public String getRecurrenceRule() { return recurrenceRule; }
-    public TaskStatus getStatus() { return status; }
+    /** 시간 순서 검증 */
+    private void validateChronology() {
+        if ((startDate == null && startTime == null) || (dueDate == null && dueTime == null)) return;
+
+        var start = toDateTime(startDate, startTime, true);
+        var end   = toDateTime(dueDate,   dueTime,   false);
+
+        if (start != null && end != null && start.isAfter(end)) {
+            throw new IllegalArgumentException("시작 일시가 마감 일시 이후일 수 없습니다.");
+        }
+    }
+
+    private static java.time.LocalDateTime toDateTime(LocalDate d, LocalTime t, boolean isStart) {
+        if (d == null && t == null) return null;
+        if (d == null) {
+            // 날짜가 없고 시간만 있는 경우엔 비교 불가능하므로 null 반환(상위에서 스킵)
+            return null;
+        }
+        LocalTime time = (t != null) ? t : (isStart ? LocalTime.MIN : LocalTime.MAX);
+        return java.time.LocalDateTime.of(d, time);
+    }
+
+
 }

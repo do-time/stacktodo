@@ -8,6 +8,8 @@ import io.app.stacktodobe.workspace.application.port.out.WorkspaceQueryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UpdateTaskService implements UpdateTaskUseCase {
@@ -45,7 +47,25 @@ public class UpdateTaskService implements UpdateTaskUseCase {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
 
-        task.changeTitle(cmd.description());
+        task.changeDescription(cmd.description());
+        updateTaskPort.save(task);
+    }
+
+    @Override
+    public void updateTask(UpdateTaskCommand cmd) {
+        var task = updateTaskPort.findById(cmd.taskId())
+                .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
+
+        // === 단순 속성 ===
+        if(cmd.title() != null) {task.changeTitle(cmd.title());}
+        if(cmd.description() != null) {task.changeDescription(cmd.description());}
+
+        // === 캘린더 시작/종료 ===
+        if (cmd.startDate() != null)    task.changeStartDate(cmd.startDate());
+        if (cmd.startTime() != null)    task.changeStartTime(cmd.startTime());
+        if (cmd.dueDate() != null)      task.changeDueDate(cmd.dueDate());
+        if (cmd.dueTime() != null)      task.changeDueTime(cmd.dueTime());
+
         updateTaskPort.save(task);
     }
 }

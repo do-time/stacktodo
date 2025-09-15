@@ -30,6 +30,10 @@ public record CreateTaskDto(
         // 선택: 템플릿에서 복사한 경우의 템플릿(Category) ID
         UUID templateId,
 
+        // 선택 : 시작일/시간
+        LocalDate startDate,
+        LocalTime startTime,
+
         // 선택: 마감일/시간
         LocalDate dueDate,
         LocalTime dueTime,
