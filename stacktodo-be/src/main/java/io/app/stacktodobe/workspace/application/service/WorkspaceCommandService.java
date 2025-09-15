@@ -1,6 +1,5 @@
 package io.app.stacktodobe.workspace.application.service;
 
-import io.app.stacktodobe.member.application.port.in.MemberQueryPort;
 import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceMemberRole;
 import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;
 import io.app.stacktodobe.workspace.application.port.in.WorkspaceCommandUseCase;

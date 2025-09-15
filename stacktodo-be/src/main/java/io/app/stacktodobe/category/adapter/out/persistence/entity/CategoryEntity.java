@@ -1,17 +1,21 @@
-package io.app.stacktodobe.category.persistence.entity;
+package io.app.stacktodobe.category.adapter.out.persistence.entity;
 
+import io.app.stacktodobe.category.domain.model.CategoryScope;
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
-import io.app.stacktodobe.workspace.adapter.out.persistence.entity.WorkspaceEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "categories")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Category extends BaseEntity {
+public class CategoryEntity extends BaseEntity {
+    @Column(name = "category_id", unique = true, nullable = false)
+    private UUID categoryId;
+
     // 카테고리 표시명(예: 루틴, 여행계획, 아침 루틴 등)
     @Column(nullable = false, length = 100)
     private String name;
@@ -28,12 +32,10 @@ public class Category extends BaseEntity {
     private CategoryScope scope; // personal/workspace/community
 
     // scope=='workspace'일 때만 사용
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_id")
-    private WorkspaceEntity workspaceEntity;
+    private UUID workspaceId;
 
     // scope=='personal'일 때만 사용
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private MemberEntity memberEntity;
+    private UUID memberId;
 }
