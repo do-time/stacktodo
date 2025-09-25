@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -26,14 +27,9 @@ public class WorkspaceRepositoryAdapter implements CreateWorkspacePort, Workspac
 
     @Override
     public Workspace create(Workspace workspace) {
-        // 1) member 검증
+        // 1) member 검증 빼야함
         var owner = memberRepository.findByMemberId(workspace.ownerId())
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자입니다."));
-
-        // 2) workspace 중복 체크
-        if (workspaceRepository.existsByOwnerIdAndNameIgnoreCase(owner.getMemberId(), workspace.name())) {
-            throw new DataIntegrityViolationException("중복된 워크스페이스 명칭입니다.");
-        }
 
         var entity = WorkspaceMapper.toEntity(workspace, owner.getMemberId());
         workspace.members().forEach(m ->
@@ -53,9 +49,21 @@ public class WorkspaceRepositoryAdapter implements CreateWorkspacePort, Workspac
     }
 
     @Override
-    public WorkspaceView findByName(String name) {
-        return workspaceRepository.findByName(name)
+    public WorkspaceView findByName(String name, UUID memberId) {
+        return workspaceRepository.findByNameAndOwnerId(name, memberId)
                 .map(WorkspaceMapper::toView)
                 .orElseThrow(() -> new EntityNotFoundException("workspace name not found: " + name));
+    }
+    @Override
+    public List<WorkspaceView> findAllByOwnerId(UUID ownerId) {
+        return workspaceRepository.findAllByOwnerId(ownerId)
+                .stream()
+                .map(WorkspaceMapper::toView)
+                .toList();
+    }
+
+    @Override
+    public boolean existsByOwnerIdAndNameIgnoreCase(UUID ownerId, String name) {
+        return workspaceRepository.existsByOwnerIdAndNameIgnoreCase(ownerId, name);
     }
 }

@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WorkspaceCommandController {
     private final WorkspaceCommandUseCase workspaceUseCase;
 
-    @PostMapping("/create-workspace")
-    public ResponseEntity<?> create(@RequestBody CreateWorkspaceDto dto) {
+    @PostMapping
+    public ResponseEntity<?> createWorkspace(@RequestBody CreateWorkspaceDto dto) {
         WorkspaceCreateCommand command = WorkspaceMapper.toCreateCommand(dto);
 
         workspaceUseCase.create(command);

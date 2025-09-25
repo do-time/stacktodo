@@ -1,6 +1,7 @@
 package io.app.stacktodobe.task.adapter.in.web.controller;
 
 import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
+import io.app.stacktodobe.task.adapter.in.web.dto.UpdateTaskDto;
 import io.app.stacktodobe.task.application.port.in.CreateTaskUseCase;
 import io.app.stacktodobe.task.application.command.CreateTaskCommand;
 import io.app.stacktodobe.task.application.port.in.UpdateTaskUseCase;
@@ -21,7 +22,7 @@ public class TaskCommandController {
     private final UpdateTaskUseCase updateTaskUseCase;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTask(@RequestBody CreateTaskDto request, Principal principal){
+    public ResponseEntity<Void> createTask(@RequestBody CreateTaskDto request, Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
         CreateTaskCommand cmd = TaskMapper.toCommand(request);
 
@@ -30,21 +31,39 @@ public class TaskCommandController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{taskId}/complete")
-    public ResponseEntity<?> complete(@PathVariable("taskId") UUID taskId, Principal principal){
+    @PatchMapping("/{taskId}/complete")
+    public ResponseEntity<Void> complete(@PathVariable("taskId") UUID taskId, Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
 
         updateTaskUseCase.complete(TaskMapper.toCompleteCommand(taskId));
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{taskId}/uncomplete")
-    public ResponseEntity<?> unComplete(@PathVariable("taskId") UUID taskId, Principal principal){
+    @PatchMapping("/{taskId}/uncomplete")
+    public ResponseEntity<Void> unComplete(@PathVariable("taskId") UUID taskId, Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
 
         updateTaskUseCase.unComplete(TaskMapper.toUnCompleteCommand(taskId));
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{taskId}/title")
+    public ResponseEntity<Void> changeTitle(@PathVariable("taskId") UUID taskId, @RequestBody UpdateTaskDto request, Principal principal) {
+        UUID memberId = UUID.fromString(principal.getName());
+
+        updateTaskUseCase.updateTask(TaskMapper.toUpdateCommand(taskId, request));
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{taskId}")
+    public ResponseEntity<Void> updateTask(@PathVariable("taskId") UUID taskId, @RequestBody UpdateTaskDto request, Principal principal) {
+        UUID memberId = UUID.fromString(principal.getName());
+
+        updateTaskUseCase.updateTask(TaskMapper.toUpdateCommand(taskId, request));
+
+        return ResponseEntity.noContent().build();
     }
 }

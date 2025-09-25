@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,8 +23,17 @@ public class WorkspaceQueryService implements WorkspaceQueryUseCase {
     }
 
     @Override
-    public WorkspaceView getWorkspace(String name) {
-        return workspaceQueryPort.findByName(name);
+    public WorkspaceView getById(UUID workspaceId,  UUID memberId) {
+        return workspaceQueryPort.findById(workspaceId, memberId);
     }
 
+    @Override
+    public WorkspaceView getByName(String name,  UUID memberId) {
+        return workspaceQueryPort.findByName(name, memberId);
+    }
+
+    @Override
+    public List<WorkspaceView> listByOwnerId(UUID ownerId) {
+        return workspaceQueryPort.findAllByOwnerId(ownerId);
+    }
 }

@@ -48,7 +48,7 @@ public final class WorkspaceFixtures {
         var dto = new CreateWorkspaceDto(name, ownerId);
 
         getClient().postForEntity(
-                "/api/v1/workspaces/create-workspace",
+                "/api/v1/workspaces",
                 dto,
                 Void.class);
     }

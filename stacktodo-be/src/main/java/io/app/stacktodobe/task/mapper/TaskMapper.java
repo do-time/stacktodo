@@ -1,6 +1,7 @@
 package io.app.stacktodobe.task.mapper;
 
 import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
+import io.app.stacktodobe.task.adapter.in.web.dto.TaskView;
 import io.app.stacktodobe.task.adapter.in.web.dto.UpdateTaskDto;
 import io.app.stacktodobe.task.adapter.out.persistence.entity.TaskEntity;
 import io.app.stacktodobe.task.application.command.CompleteTaskCommand;
@@ -39,7 +40,7 @@ public class TaskMapper {
         return new UnCompleteTaskCommand(taskId);
     }
 
-    public static UpdateTaskCommand toUpdateCommand(UpdateTaskDto dto, UUID taskId){
+    public static UpdateTaskCommand toUpdateCommand(UUID taskId, UpdateTaskDto dto){
         return UpdateTaskCommand.builder()
                 .taskId(taskId)
                 .title(dto.title())
@@ -89,6 +90,26 @@ public class TaskMapper {
                 .isRoutine(task.isRoutine())
                 .recurrenceRule(task.getRecurrenceRule())
                 .status(task.getStatus())
+                .build();
+    }
+
+    public static TaskView toView(Task task){
+        return TaskView.builder()
+                .taskId(task.getTaskId())
+                .workspaceId(task.getWorkspaceId())
+                .categoryId(task.getCategoryId())
+                .ownerId(task.getOwnerId())
+                .title(task.getTitle())
+                .description(task.getDescription())
+                .startDate(task.getStartDate())
+                .startTime(task.getStartTime())
+                .dueDate(task.getDueDate())
+                .dueTime(task.getDueTime())
+                .priority(task.getPriority())
+                .status(task.getStatus())
+                .percentComplete(task.getPercentComplete())
+                .recurrenceRule(task.getRecurrenceRule())
+                .templateCategoryId(task.getTemplateCategoryId())
                 .build();
     }
 }
