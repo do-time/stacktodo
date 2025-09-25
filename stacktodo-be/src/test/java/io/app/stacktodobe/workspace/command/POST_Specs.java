@@ -26,7 +26,7 @@ class POST_Specs {
 
         //act
         var response = testRestTemplate.postForEntity(
-                "/api/v1/workspaces/create-workspace",
+                "/api/v1/workspaces",
                 dto,
                 Void.class);
 
@@ -44,7 +44,7 @@ class POST_Specs {
 
         //act
         var response = testRestTemplate.postForEntity(
-                "/api/v1/workspaces/create-workspace",
+                "/api/v1/workspaces",
                 dto,
                 String.class
         );
@@ -64,7 +64,7 @@ class POST_Specs {
         //act
         // 첫 번째 워크스페이스 생성 (정상)
         var firstResponse = testRestTemplate.postForEntity(
-                "/api/v1/workspaces/create-workspace",
+                "/api/v1/workspaces",
                 dto,
                 Void.class
         );
@@ -72,7 +72,7 @@ class POST_Specs {
 
         // 같은 이름으로 다시 생성 요청
         var duplicateResponse = testRestTemplate.postForEntity(
-                "/api/v1/workspaces/create-workspace",
+                "/api/v1/workspaces",
                 dto,
                 String.class
         );
