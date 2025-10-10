@@ -1,4 +1,4 @@
-package io.app.stacktodobe.workspace.adapter.out;
+package io.app.stacktodobe.workspace.adapter.out.persistence;
 
 
 import io.app.stacktodobe.common.exception.EntityNotFoundException;

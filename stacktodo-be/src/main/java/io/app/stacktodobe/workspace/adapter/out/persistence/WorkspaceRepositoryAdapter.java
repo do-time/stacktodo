@@ -1,4 +1,4 @@
-package io.app.stacktodobe.workspace.adapter.out;
+package io.app.stacktodobe.workspace.adapter.out.persistence;
 
 
 import io.app.stacktodobe.common.exception.EntityNotFoundException;
@@ -11,7 +11,6 @@ import io.app.stacktodobe.workspace.domain.model.Workspace;
 import io.app.stacktodobe.workspace.mapper.WorkspaceMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
