@@ -1,10 +1,7 @@
 package io.app.stacktodobe.task.adapter.in.web.controller;
 
-import io.app.stacktodobe.task.adapter.in.web.dto.CreateTaskDto;
 import io.app.stacktodobe.task.adapter.in.web.dto.TaskView;
-import io.app.stacktodobe.task.application.command.CreateTaskCommand;
 import io.app.stacktodobe.task.application.port.in.TaskQueryUseCase;
-import io.app.stacktodobe.task.mapper.TaskMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +22,7 @@ public class TaskQueryController {
     @GetMapping("/{taskId}")
     public ResponseEntity<TaskView> getTask(@PathVariable UUID taskId, Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
-        var view = taskQueryUseCase.getById(memberId, taskId);
+        var view = taskQueryUseCase.getTask(memberId, taskId);
 
         return ResponseEntity.ok(view);
     }
@@ -35,7 +32,7 @@ public class TaskQueryController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
-        var view = taskQueryUseCase.listByMemberAndDay(memberId, date);
+        var view = taskQueryUseCase.getListByMember(memberId, date);
 
         return ResponseEntity.ok(view);
     }
@@ -46,6 +43,6 @@ public class TaskQueryController {
             Principal principal) {
         UUID memberId = UUID.fromString(principal.getName());
         YearMonth ym = YearMonth.parse(month);
-        return ResponseEntity.ok(taskQueryUseCase.listByMemberAndMonth(memberId, ym));
+        return ResponseEntity.ok(taskQueryUseCase.getListByMember(memberId, ym));
     }
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryCommandController {
     private final CreateCategoryUseCase createCategoryUseCase;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Void> create(@RequestBody CreateCategoryDto request){
         var command = CategoryMapper.toCommand(request);
 

@@ -1,5 +1,6 @@
 package io.app.stacktodobe.category.mapper;
 
+import io.app.stacktodobe.category.adapter.in.web.dto.CategoryView;
 import io.app.stacktodobe.category.adapter.in.web.dto.CreateCategoryDto;
 import io.app.stacktodobe.category.adapter.out.persistence.entity.CategoryEntity;
 import io.app.stacktodobe.category.application.command.CreateCategoryCommand;
@@ -28,6 +29,17 @@ public final class CategoryMapper {
                 .scope(dto.scope())
                 .workspaceId(dto.workspaceId())
                 .memberId(dto.memberId())
+                .build();
+    }
+
+    public static CategoryView toView(Category category) {
+        return CategoryView.builder()
+                .name(category.getName())
+                .description(category.getDescription())
+                .scope(category.getScope())
+                .workspaceId(category.getWorkspaceId())
+                .memberId(category.getMemberId())
+                .categoryId(category.getCategoryId())
                 .build();
     }
 }
