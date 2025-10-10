@@ -19,7 +19,7 @@ public class TaskQueryService implements TaskQueryUseCase {
     private TaskQueryPort taskQueryPort;
 
     @Override
-    public TaskView getById(UUID taskId, UUID memberId) {
+    public TaskView getTask(UUID taskId, UUID memberId) {
         // 1) member entity get 소스추가
         //var member =
 
@@ -30,7 +30,7 @@ public class TaskQueryService implements TaskQueryUseCase {
     }
 
     @Override
-    public List<TaskView> listByOwner(UUID memberId) {
+    public List<TaskView> getListByMember(UUID memberId) {
         return taskQueryPort.findAllByOwnerId(memberId)
                 .stream()
                 .map(TaskMapper::toView)
@@ -38,25 +38,7 @@ public class TaskQueryService implements TaskQueryUseCase {
     }
 
     @Override
-    public List<TaskView> listByWorkspace(UUID workspaceId) {
-        return taskQueryPort.findAllByWorkspaceId(workspaceId)
-                .stream()
-                .map(TaskMapper::toView)
-                .toList();
-    }
-
-    @Override
-    public List<TaskView> listByWorkspaceAndDay(UUID workspaceId, LocalDate date) {
-        return List.of();
-    }
-
-    @Override
-    public List<TaskView> listByWorkspaceAndMonth(UUID workspaceId, YearMonth ym) {
-        return List.of();
-    }
-
-    @Override
-    public List<TaskView> listByMemberAndDay(UUID memberId, LocalDate date) {
+    public List<TaskView> getListByMember(UUID memberId, LocalDate date) {
         return taskQueryPort.findAllByOwnerIdAndStartDate(memberId, date)
                 .stream()
                 .map(TaskMapper::toView)
@@ -64,9 +46,25 @@ public class TaskQueryService implements TaskQueryUseCase {
     }
 
     @Override
-    public List<TaskView> listByMemberAndMonth(UUID memberId, YearMonth ym) {
+    public List<TaskView> getListByMember(UUID memberId, YearMonth ym) {
         return List.of();
     }
 
+    @Override
+    public List<TaskView> getListByWorkspace(UUID workspaceId) {
+        return taskQueryPort.findAllByWorkspaceId(workspaceId)
+                .stream()
+                .map(TaskMapper::toView)
+                .toList();
+    }
 
+    @Override
+    public List<TaskView> getListByWorkspace(UUID workspaceId, LocalDate date) {
+        return List.of();
+    }
+
+    @Override
+    public List<TaskView> getListByWorkspace(UUID workspaceId, YearMonth ym) {
+        return List.of();
+    }
 }

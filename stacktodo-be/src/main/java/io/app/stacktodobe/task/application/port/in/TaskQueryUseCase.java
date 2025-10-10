@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TaskQueryUseCase {
-    TaskView getById(UUID taskId, UUID memberId);
-    List<TaskView> listByOwner(UUID memberId);
-    List<TaskView> listByWorkspace(UUID workspaceId);
-    List<TaskView> listByWorkspaceAndDay(UUID workspaceId, LocalDate date);
-    List<TaskView> listByWorkspaceAndMonth(UUID workspaceId, YearMonth ym);
-    List<TaskView> listByMemberAndDay(UUID memberId, LocalDate date);
-    List<TaskView> listByMemberAndMonth(UUID memberId, YearMonth month); //YYYY-MM
+    TaskView getTask(UUID taskId, UUID memberId);
+    List<TaskView> getListByMember(UUID memberId);
+    List<TaskView> getListByMember(UUID memberId, LocalDate date);
+    List<TaskView> getListByMember(UUID memberId, YearMonth month); //YYYY-MM
+    List<TaskView> getListByWorkspace(UUID workspaceId);
+    List<TaskView> getListByWorkspace(UUID workspaceId, LocalDate date);
+    List<TaskView> getListByWorkspace(UUID workspaceId, YearMonth ym);
+
 }
