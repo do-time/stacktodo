@@ -1,7 +1,7 @@
 package io.app.stacktodobe.member;
 
 
-import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberDto;
+import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberRequest;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberView;
 import io.app.stacktodobe.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
@@ -65,7 +65,7 @@ public class GET_specs {
 
         memberFixtures.getClient()
                 .postForEntity("/api/v1/members/signup",
-                        new CreateMemberDto(
+                        new CreateMemberRequest(
                                 email,
                                 password,
                                 username,

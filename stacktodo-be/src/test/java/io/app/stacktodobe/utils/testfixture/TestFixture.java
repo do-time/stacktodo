@@ -2,7 +2,7 @@ package io.app.stacktodobe.utils.testfixture;
 
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
-import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberDto;
+import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberRequest;
 import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
 import org.springframework.boot.test.web.client.LocalHostUriTemplateHandler;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -25,7 +25,7 @@ public record TestFixture(
     public void createMemberAndSetDefaultUser() {
         String email = generateEmail();
         String password = generatePassword();
-        var request = new CreateMemberDto(
+        var request = new CreateMemberRequest(
                 email,
                 password,
                 generateUsername(),
