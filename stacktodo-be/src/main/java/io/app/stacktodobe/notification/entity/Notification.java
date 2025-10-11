@@ -1,7 +1,7 @@
 package io.app.stacktodobe.notification.entity;
 
 import io.app.stacktodobe.common.entity.BaseEntity;
-import io.app.stacktodobe.member.persistence.entity.Member;
+import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.notification.enums.NotificationChannel;
 import io.app.stacktodobe.notification.enums.NotificationEntityType;
 import io.app.stacktodobe.notification.enums.NotificationStatus;
@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
                 @Index(name = "idx_notification_entity", columnList = "entityType,entityId")
         })
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class Notification extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +35,7 @@ public class Notification extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_id", nullable = false)
-    private Member member; // 수신 대상
+    private MemberEntity memberEntity; // 수신 대상
 
     @Column(nullable = false)
     @Builder.Default

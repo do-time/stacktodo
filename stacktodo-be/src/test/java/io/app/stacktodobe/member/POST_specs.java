@@ -1,7 +1,8 @@
 package io.app.stacktodobe.member;
 
-import io.app.stacktodobe.member.presentation.command.MemberCreateCommand;
+import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 import io.app.stacktodobe.utils.E2eTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,6 +13,7 @@ import static io.app.stacktodobe.utils.TestSourceGenerator.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @E2eTest
+@DisplayName("POST /api/v1/members")
 public class POST_specs {
 
     @Test
@@ -22,7 +24,8 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 generatePassword(),
-                generateNickname(),
+                null,
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );
@@ -33,7 +36,7 @@ public class POST_specs {
                 command,
                 Void.class);
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(204);
     }
 
@@ -49,7 +52,8 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 email,
          generatePassword(),
-         generateNickname(),
+         null,
+         generateUsername(),
          generateProfileImage(),
          generatePhoneNumber()
         );
@@ -71,7 +75,8 @@ public class POST_specs {
         var command = new MemberCreateCommand(
                 generateEmail(),
                 password,
-                generateNickname(),
+                null,
+                generateUsername(),
                 generateProfileImage(),
                 generatePhoneNumber()
         );
@@ -84,7 +89,7 @@ public class POST_specs {
         );
 
         //assert
-        assertThat(response.getStatusCodeValue())
+        assertThat(response.getStatusCode().value())
                 .isEqualTo(400);
     }
 

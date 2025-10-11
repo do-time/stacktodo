@@ -18,6 +18,31 @@
 server:
   port: 8080
 
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: stacktodo
+
+# oauth2 client config
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: github-client-id
+            clientSecret: github-client-secret
+          google:
+            client-id: 281108020758-f716dpb9sagb8sdkfv7nrt9he2dmdjvv.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+  integration:
+    management:
+      default-logging-enabled: true
+# security secret key val
 security:
   jwt:
     secret: c2f3e8b4-9d4b-4a6e-8f3e-2d7c9a1b5e6f
+
