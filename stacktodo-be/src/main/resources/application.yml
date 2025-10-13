@@ -41,6 +41,11 @@ spring:
   integration:
     management:
       default-logging-enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
 # security secret key val
 security:
   jwt:
