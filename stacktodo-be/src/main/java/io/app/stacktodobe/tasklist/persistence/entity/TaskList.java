@@ -1,7 +1,6 @@
 package io.app.stacktodobe.tasklist.persistence.entity;
 
 import io.app.stacktodobe.category.adapter.out.persistence.entity.CategoryEntity;
-import io.app.stacktodobe.common.entity.BaseEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -11,14 +10,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "task_list")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Builder(access = AccessLevel.PRIVATE)
-public class TaskList extends BaseEntity {
+public class TaskList {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 120)
@@ -44,7 +44,7 @@ public class TaskList extends BaseEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity categoryEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity; // scope==personal일 때 사용
 
