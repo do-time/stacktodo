@@ -10,15 +10,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
+import static java.util.Objects.requireNonNull;
+
 @NoArgsConstructor
 @Data
 @Setter(value = AccessLevel.PRIVATE)
 public class Member {
-    private String email;
+    private Email email;
 
     private UUID memberId;
 
-    private String password;
+    private Password password;
 
     @Setter(AccessLevel.PUBLIC)
     private String hashedPassword;
@@ -38,26 +40,36 @@ public class Member {
 
     public static Member createMember(MemberCreateCommand command, PasswordEncoder passwordEncoder) {
         Member member = new Member();
-        member.setMemberId(UUID.randomUUID());
-        member.setEmail(command.email());
-        member.setPassword(command.password());
-        member.setHashedPassword(passwordEncoder.encode(command.password()));
-        member.setUsername(command.username());
+
+        member.setMemberId(requireNonNull(UUID.randomUUID()));
+
+        Email address = new Email(requireNonNull(command.email()));
+        member.setEmail(address);
+
+        String encodedPwd = passwordEncoder.encode(command.password());
+        member.setPassword(new Password(requireNonNull(command.password())));
+        member.setHashedPassword(requireNonNull(encodedPwd));
+
+        member.setUsername(requireNonNull(command.username()));
+
         member.setProfileImage(command.profileImage());
         member.setPhoneNumber(command.phoneNumber());
+
         return member;
     }
 
     public static Member createMemberByOauth(OAuthMemberCreateCommand command) {
         Member member = new Member();
-        member.setMemberId(UUID.randomUUID());
-        member.setEmail(command.email());
-        member.setUsername(command.username());
-        member.setProfileImage(command.profileImage());
-        member.setPhoneNumber(command.phoneNumber());
-        member.setProvider(command.provider());
-        member.setProviderId(command.providerId());
+
+        member.setMemberId(requireNonNull(UUID.randomUUID()));
+        member.setEmail(new Email(requireNonNull(command.email())));
+        member.setUsername(requireNonNull(command.username()));
+        member.setProfileImage(requireNonNull(command.profileImage()));
+        member.setPhoneNumber(requireNonNull(command.phoneNumber()));
+        member.setProvider(requireNonNull(command.provider()));
+        member.setProviderId(requireNonNull(command.providerId()));
         member.setRole("ROLE_USER");
+
         return member;
 
     }

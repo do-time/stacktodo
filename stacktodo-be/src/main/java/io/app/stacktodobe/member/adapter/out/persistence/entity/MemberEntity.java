@@ -36,10 +36,10 @@ public class MemberEntity extends BaseEntity {
 
     public static MemberEntity domainToEntity(Member domain, String hashedPassword) {
         MemberEntity memberEntity = new MemberEntity();
-        System.out.println("domain :" + domain.toString());
+
         memberEntity.setMemberId(UUID.randomUUID());
         memberEntity.setHashedPassword(hashedPassword);
-        memberEntity.setEmail(domain.getEmail());
+        memberEntity.setEmail(domain.getEmail().address());
         memberEntity.setUsername(domain.getUsername());
         memberEntity.setProfileImage(domain.getProfileImage());
         memberEntity.setPhoneNumber(domain.getPhoneNumber());

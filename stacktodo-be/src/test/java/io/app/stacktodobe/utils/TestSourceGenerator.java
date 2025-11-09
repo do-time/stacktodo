@@ -42,6 +42,7 @@ public class TestSourceGenerator {
     public static String generateProfileImage() {
         return "https://example.com/profile/" + UUID.randomUUID().toString();
     }
+
     public static String generatePhoneNumber() {
         return "+82-" + (100000000 + (int) (Math.random() * 900000000));
     }
