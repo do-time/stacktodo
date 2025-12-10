@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.*;
 
 @Entity
-@Table(name = "workspace",
+@Table(name = "workspaces ",
         uniqueConstraints = @UniqueConstraint(columnNames = {"owner_id", "name"}))
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
