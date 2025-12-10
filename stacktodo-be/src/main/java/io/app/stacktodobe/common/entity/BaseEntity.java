@@ -2,6 +2,7 @@ package io.app.stacktodobe.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -27,6 +28,7 @@ public abstract class BaseEntity {
     private LocalDateTime updatedAt;
 
     @Column(name = "deleted", nullable = false)
+    @ColumnDefault("0")
     private boolean deleted = false;
 
     @Column(name = "deleted_at")
