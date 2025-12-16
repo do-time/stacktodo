@@ -2,7 +2,7 @@ package io.app.stacktodobe.member.adapter.in.web.controller;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
-import io.app.stacktodobe.member.application.port.in.usecase.IssueTokenCommandUseCase;
+import io.app.stacktodobe.member.application.usecase.IssueTokenCommandUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

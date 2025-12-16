@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.application.port.in.usecase;
+package io.app.stacktodobe.member.application.usecase;
 
 import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
 

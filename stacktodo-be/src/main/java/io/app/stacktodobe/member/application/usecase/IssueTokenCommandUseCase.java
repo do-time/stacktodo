@@ -1,11 +1,11 @@
-package io.app.stacktodobe.member.application.port.in.usecase;
+package io.app.stacktodobe.member.application.usecase;
 
 import io.app.stacktodobe.infrastructure.jwt.JwtKeyHolder;
-import io.app.stacktodobe.member.exception.InvalidCommandException;
+import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.adapter.out.persistence.entity.MemberEntity;
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
-import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
+import io.app.stacktodobe.member.exception.InvalidCommandException;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
