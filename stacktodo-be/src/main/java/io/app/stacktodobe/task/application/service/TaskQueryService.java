@@ -6,6 +6,7 @@ import io.app.stacktodobe.task.application.port.in.TaskQueryUseCase;
 import io.app.stacktodobe.task.application.port.out.TaskQueryPort;
 import io.app.stacktodobe.task.mapper.TaskMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,17 +16,18 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TaskQueryService implements TaskQueryUseCase {
-    private TaskQueryPort taskQueryPort;
+    final private TaskQueryPort taskQueryPort;
 
     @Override
     public TaskView getTask(UUID taskId, UUID memberId) {
         // 1) member entity get 소스추가
         //var member =
-
+        log.info("Getting task with taskId {}, memberId {}", taskId, memberId);
         var task = taskQueryPort.findByTaskIdAndOwnerId(taskId, memberId)
                 .orElseThrow(() -> new EntityNotFoundException("Task not found: " + taskId));
-
+        log.info("Task with id {} found", taskId);
         return TaskMapper.toView(task);
     }
 
