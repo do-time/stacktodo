@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -36,6 +39,7 @@ public class SecurityConfig {
                                                    PrincipalOauth2UserService principalOauth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .oauth2ResourceServer(c -> c.jwt(jwt -> jwt.decoder(jwtDecoder)))
                 // OAuth2 로그인 설정
                 .oauth2Login(oauth2 -> oauth2
@@ -48,6 +52,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/members/signup").permitAll()
                         .requestMatchers("/api/v1/members/issueToken").permitAll()
                         .requestMatchers("/api/v1/workspaces/**").permitAll()
+                        .requestMatchers("/api/v1/tasks/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
@@ -64,5 +69,23 @@ public class SecurityConfig {
     JwtKeyHolder jwtKeyHolder(@Value("${security.jwt.secret}") String jwtSecret) {
         SecretKey key = new SecretKeySpec(jwtSecret.getBytes(), "HmacSHA256");
         return new JwtKeyHolder(key);
+    }
+
+    /**
+     * API 연동 테스트를 위한 임시 전체 개방
+     * @return
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOriginPattern("*");   // 모든 Origin 허용
+        config.addAllowedHeader("*");          // 모든 헤더 허용
+        config.addAllowedMethod("*");          // GET, POST 등 모든 메서드 허용
+        config.setAllowCredentials(true);      // 인증 정보 포함 허용(Optional)
+        config.addExposedHeader("*");          // 모든 응답 헤더 노출
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }

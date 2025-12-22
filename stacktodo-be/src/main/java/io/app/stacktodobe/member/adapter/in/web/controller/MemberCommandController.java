@@ -2,7 +2,7 @@ package io.app.stacktodobe.member.adapter.in.web.controller;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberRequest;
 import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
-import io.app.stacktodobe.member.application.port.in.usecase.impl.MemberCommandCommandUseCaseImpl;
+import io.app.stacktodobe.member.application.usecase.impl.MemberCommandCommandUseCaseImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

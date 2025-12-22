@@ -1,19 +1,14 @@
-package io.app.stacktodobe.workspace.command;
+package io.app.stacktodobe.integration.workspace.command;
 
-import io.app.stacktodobe.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
-import io.app.stacktodobe.workspace.adapter.in.web.dto.CreateWorkspaceDto;
 import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceView;
-import io.app.stacktodobe.workspace.command.support.WorkspaceFixtures;
-import org.junit.jupiter.api.Assertions;
+import io.app.stacktodobe.integration.workspace.command.support.WorkspaceFixtures;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.UUID;
 
 import static io.app.stacktodobe.utils.TestSourceGenerator.generateWorkspaceName;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

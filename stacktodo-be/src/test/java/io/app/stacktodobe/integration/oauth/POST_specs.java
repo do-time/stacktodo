@@ -1,4 +1,4 @@
-package io.app.stacktodobe.oauth;
+package io.app.stacktodobe.integration.oauth;
 
 import io.app.stacktodobe.member.adapter.out.persistence.repository.MemberRepository;
 import io.app.stacktodobe.utils.E2eTest;

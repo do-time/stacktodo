@@ -1,9 +1,9 @@
-package io.app.stacktodobe.member.application.port.in.usecase.impl;
+package io.app.stacktodobe.member.application.usecase.impl;
 
 
 import io.app.stacktodobe.member.adapter.out.persistence.MemberRepositoryAdapter;
 import io.app.stacktodobe.member.application.port.in.command.MemberCreateCommand;
-import io.app.stacktodobe.member.application.port.in.usecase.MemberCommandUseCase;
+import io.app.stacktodobe.member.application.usecase.MemberCommandUseCase;
 import io.app.stacktodobe.member.domain.Member;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

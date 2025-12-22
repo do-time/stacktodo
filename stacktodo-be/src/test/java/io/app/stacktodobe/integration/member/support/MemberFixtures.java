@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.support;
+package io.app.stacktodobe.integration.member.support;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;
@@ -45,12 +45,15 @@ public class MemberFixtures {
     }
 
     public String issueToken(String email, String password) {
-        ResponseEntity<AccessTokenCarrier> response = client.postForEntity(
+        ResponseEntity<AccessTokenCarrier> response = issueTokenWithResponse(email, password);
+        return requireNonNull(response.getBody()).accessToken();
+    }
+
+    public ResponseEntity<AccessTokenCarrier> issueTokenWithResponse(String email, String password) {
+        return client.postForEntity(
                 "/api/v1/members/issueToken",
                 new IssueTokenCommand(email, password),
                 AccessTokenCarrier.class);
-
-        return requireNonNull(response.getBody()).accessToken();
     }
 
     public void createMember(String email, String password) {
