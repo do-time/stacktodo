@@ -76,6 +76,7 @@ public class TaskMapper {
 
     public static TaskEntity toEntity(Task task) {
         return TaskEntity.builder()
+                .taskId(task.getTaskId())
                 .title(task.getTitle())
                 .description(task.getDescription())
                 .workspaceId(task.getWorkspaceId())
