@@ -23,6 +23,9 @@ public record UpdateTaskDto(
         // 선택: 우선순위(1~5). null이면 서비스에서 3으로 디폴트 처리
         @jakarta.validation.constraints.Min(1)
         @jakarta.validation.constraints.Max(5)
-        Integer priority
+        Integer priority,
+
+        // 선택: 완료 여부. null이면 서비스에서 false 처리
+        Boolean isComplete
 ) {
 }

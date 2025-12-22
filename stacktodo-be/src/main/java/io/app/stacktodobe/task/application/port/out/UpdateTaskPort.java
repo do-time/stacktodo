@@ -8,5 +8,7 @@ import java.util.UUID;
 public interface UpdateTaskPort {
     Task save(Task task);
 
+    Task update(Task task);
+
     Optional<Task> findById(UUID taskId);
 }

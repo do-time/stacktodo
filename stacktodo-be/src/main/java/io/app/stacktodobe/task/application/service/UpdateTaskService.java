@@ -6,52 +6,60 @@ import io.app.stacktodobe.task.application.port.in.UpdateTaskUseCase;
 import io.app.stacktodobe.task.application.port.out.UpdateTaskPort;
 import io.app.stacktodobe.workspace.application.port.out.WorkspaceQueryPort;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UpdateTaskService implements UpdateTaskUseCase {
     private final UpdateTaskPort updateTaskPort;
 
     @Override
+    @Transactional
     public void complete(CompleteTaskCommand cmd) {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
 
         task.complete();
-        updateTaskPort.save(task);
+        updateTaskPort.update(task);
     }
 
     @Override
+    @Transactional
     public void unComplete(UnCompleteTaskCommand cmd) {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
 
         task.unComplete();
-        updateTaskPort.save(task);
+        updateTaskPort.update(task);
     }
 
     @Override
+    @Transactional
     public void changeTitle(ChangeTitleCommand cmd) {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
 
         task.changeTitle(cmd.title());
-        updateTaskPort.save(task);
+        updateTaskPort.update(task);
     }
 
     @Override
+    @Transactional
     public void changeDescription(ChangeDescriptionCommand cmd) {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
 
         task.changeDescription(cmd.description());
-        updateTaskPort.save(task);
+        updateTaskPort.update(task);
     }
 
     @Override
+    @Transactional
     public void updateTask(UpdateTaskCommand cmd) {
         var task = updateTaskPort.findById(cmd.taskId())
                 .orElseThrow(() -> new IllegalArgumentException("Task not found: " + cmd.taskId()));
@@ -66,6 +74,16 @@ public class UpdateTaskService implements UpdateTaskUseCase {
         if (cmd.dueDate() != null)      task.changeDueDate(cmd.dueDate());
         if (cmd.dueTime() != null)      task.changeDueTime(cmd.dueTime());
 
-        updateTaskPort.save(task);
+        // === Status 처리 ===
+        if (cmd.priority() != null) {task.changePriority(cmd.priority());}
+        if (cmd.isComplete() != null) {
+            if (cmd.isComplete()) {
+                task.complete();
+            } else {
+                task.unComplete();
+            }
+        }
+
+        updateTaskPort.update(task);
     }
 }
