@@ -1,4 +1,4 @@
-package io.app.stacktodobe.member.support;
+package io.app.stacktodobe.integration.member.support;
 
 import io.app.stacktodobe.member.adapter.in.web.dto.AccessTokenCarrier;
 import io.app.stacktodobe.member.application.port.in.command.IssueTokenCommand;

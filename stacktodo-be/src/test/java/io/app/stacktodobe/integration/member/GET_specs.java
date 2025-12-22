@@ -1,9 +1,9 @@
-package io.app.stacktodobe.member;
+package io.app.stacktodobe.integration.member;
 
 
 import io.app.stacktodobe.member.adapter.in.web.dto.CreateMemberRequest;
 import io.app.stacktodobe.member.adapter.in.web.dto.MemberView;
-import io.app.stacktodobe.member.support.MemberFixtures;
+import io.app.stacktodobe.integration.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

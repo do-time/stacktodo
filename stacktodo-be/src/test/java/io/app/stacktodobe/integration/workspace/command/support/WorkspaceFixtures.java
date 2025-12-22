@@ -1,8 +1,7 @@
-package io.app.stacktodobe.workspace.command.support;
+package io.app.stacktodobe.integration.workspace.command.support;
 
 
-import io.app.stacktodobe.member.adapter.in.web.dto.MemberView;
-import io.app.stacktodobe.member.support.MemberFixtures;
+import io.app.stacktodobe.integration.member.support.MemberFixtures;
 import io.app.stacktodobe.workspace.adapter.in.web.dto.CreateWorkspaceDto;
 import io.app.stacktodobe.workspace.adapter.in.web.dto.WorkspaceView;
 import io.app.stacktodobe.workspace.application.command.WorkspaceCreateCommand;

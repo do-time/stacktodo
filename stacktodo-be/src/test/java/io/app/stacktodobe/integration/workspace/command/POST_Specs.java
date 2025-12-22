@@ -1,6 +1,6 @@
-package io.app.stacktodobe.workspace.command;
+package io.app.stacktodobe.integration.workspace.command;
 
-import io.app.stacktodobe.member.support.MemberFixtures;
+import io.app.stacktodobe.integration.member.support.MemberFixtures;
 import io.app.stacktodobe.utils.E2eTest;
 import io.app.stacktodobe.workspace.adapter.in.web.dto.CreateWorkspaceDto;
 import org.junit.jupiter.api.DisplayName;
