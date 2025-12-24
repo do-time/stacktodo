@@ -150,8 +150,6 @@ class POST_specs {
 
             // assert
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-            // TODO: 에러 메시지 검증 추가
-            // assertThat(response.getBody()).contains("이메일은 필수입니다");
         }
 
         @Test

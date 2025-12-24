@@ -77,13 +77,4 @@ class POST_specs {
         assertThat(response.getStatusCode()).isIn(HttpStatus.BAD_REQUEST, HttpStatus.NOT_FOUND, HttpStatus.UNAUTHORIZED);
     }
 
-
-    // 헬퍼 메서드들
-    private boolean isValidEmail(String email) {
-        return email != null && email.contains("@") && email.contains(".");
-    }
-
-    private boolean isValidProvider(String provider) {
-        return "google".equals(provider) || "github".equals(provider);
-    }
 }
